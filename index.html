@@ -254,6 +254,10 @@
   #servicios .service-overlay li { align-items: flex-start; }
   #servicios .service-overlay li svg { margin-top: 3px; }
   @media (min-width: 640px) { #servicios .reveal.group { min-height: 21rem; } }
+  /* foto del equipo en Quiénes somos: recorte más panorámico según el ancho */
+  .team-banner { aspect-ratio: 4 / 3; }
+  @media (min-width: 640px) { .team-banner { aspect-ratio: 16 / 9; } }
+  @media (min-width: 1024px) { .team-banner { aspect-ratio: 21 / 9; } }
 </style>
 </head>
 
@@ -519,7 +523,12 @@
       </div>
     </div>
 
-    <div class="mt-16 grid sm:grid-cols-3 gap-5">
+    <div class="reveal zoom-parent team-banner mt-16 relative overflow-hidden rounded-2xl border border-ink/8 bg-bone">
+      <img src="assets/equipo/equipo.jpeg" alt="Los tres socios de Mesa Urbana: Rafael Serrano, Helena Guerrero y Carlos Prada" class="duotone zoom-img w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 duotone-overlay"></div>
+    </div>
+
+    <div class="mt-5 grid sm:grid-cols-3 gap-5">
       <button type="button" data-member="helena" class="reveal card-hover zoom-parent block w-full text-left rounded-2xl overflow-hidden border border-ink/8 bg-bone">
         <div class="relative aspect-[4/5] overflow-hidden">
           <img src="assets/equipo/helena-guerrero.jpg" alt="Arq. Helena Guerrero" class="duotone zoom-img w-full h-full object-cover">
@@ -1066,9 +1075,11 @@
     'edificio-lmf-80': { title: 'Edificio LMF 80', category: '', description: '', images: projectImages('edificio-lmf-80', 11) },
     'hospital-villa-rica': { title: 'Hospital Villa Rica', category: '', description: '', images: projectImages('hospital-villa-rica', 4) },
     'oficina-ingenieria-sas': { title: 'Oficina Ingenieria SAS', category: '', description: '', images: projectImages('oficina-ingenieria-sas', 4) },
+    'oficina-ricardo-serrano': { title: 'Oficina Ricardo Serrano', category: '', description: '', images: projectImages('oficina-ricardo-serrano', 3) },
     'oficina-t-seis-arquitectos': { title: 'Oficina T Seis Arquitectos', category: '', description: '', images: projectImages('oficina-t-seis-arquitectos', 3) },
     'restaurante-naruto': { title: 'Restaurante Naruto', category: 'Ibagué · 2025 · aprox. 200 m²', description: 'Rol: equipo de diseño (con el arq. Daniel Caro) y visualización\nAmpliación de restaurante asiático con 2 pisos en la parte posterior. Se conservó la edificación existente con reforzamiento estructural; el dueño aprobó y construyó la primera etapa.', images: projectImages('restaurante-naruto', 13) },
     'serena-house': { title: 'Serena House', category: 'Zona rural de Ibagué · 2025 · 90 m²', description: 'Rol: diseño y visualización\nCasa vacacional con fachada de cristal y estructura metálica orientada a un lago artificial. Diseño aprobado en menos de 3 semanas y entregado completo para construcción.', images: projectImages('serena-house', 4) },
+    'transformacion-malecon-ambalema': { title: 'Transformación del Malecón de Ambalema', category: 'Ambalema, Tolima · 2026 · aprox. 5.400 m²', description: 'Rol: formulación del proyecto de intervención efímera\nEstrategia de intervención urbana efímera que transforma los resultados de un proceso participativo en una propuesta espacial articulada con el concepto de ciudad Ambalema Mágico. En evaluación y estructuración para su implementación.', images: projectImages('transformacion-malecon-ambalema', 5) },
   };
 
   const portfolioGrid = document.getElementById('portfolio-grid');
