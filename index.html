@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mesa Urbana S.A.S — Arquitectura, Urbanismo, Construcción e Inmobiliaria</title>
-<meta name="description" content="Estudio integral de arquitectura, urbanismo, construcción y desarrollo inmobiliario en todo el territorio. Diseñamos y construimos los espacios donde crece la ciudad." />
+<title>Mesa Urbana S.A.S. — Arquitectura, Urbanismo, Construcción e Inmobiliaria</title>
+<meta name="description" content="Estudio integral de arquitectura, urbanismo, construcción y desarrollo inmobiliario. Diseñamos y construimos los espacios donde crece la ciudad." />
 
 <link rel="icon" type="image/png" href="assets/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Mesa Urbana S.A.S" />
+<meta property="og:site_name" content="Mesa Urbana S.A.S." />
 <meta property="og:locale" content="es_CO" />
-<meta property="og:title" content="Mesa Urbana S.A.S — Arquitectura, Urbanismo, Construcción e Inmobiliaria" />
-<meta property="og:description" content="Estudio integral de arquitectura, urbanismo, construcción y desarrollo inmobiliario en todo el territorio. Diseñamos y construimos los espacios donde crece la ciudad." />
+<meta property="og:title" content="Mesa Urbana S.A.S. — Arquitectura, Urbanismo, Construcción e Inmobiliaria" />
+<meta property="og:description" content="Estudio integral de arquitectura, urbanismo, construcción y desarrollo inmobiliario. Diseñamos y construimos los espacios donde crece la ciudad." />
 <meta property="og:image" content="assets/og-image.png" />
 <!-- TODO: cuando el sitio tenga dominio propio, agregar <meta property="og:url"> y volver og:image/twitter:image URLs absolutas (https://tu-dominio.com/assets/og-image.png) -->
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Mesa Urbana S.A.S — Arquitectura, Urbanismo, Construcción e Inmobiliaria" />
-<meta name="twitter:description" content="Estudio integral de arquitectura, urbanismo, construcción y desarrollo inmobiliario en todo el territorio. Diseñamos y construimos los espacios donde crece la ciudad." />
+<meta name="twitter:title" content="Mesa Urbana S.A.S. — Arquitectura, Urbanismo, Construcción e Inmobiliaria" />
+<meta name="twitter:description" content="Estudio integral de arquitectura, urbanismo, construcción y desarrollo inmobiliario. Diseñamos y construimos los espacios donde crece la ciudad." />
 <meta name="twitter:image" content="assets/og-image.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -249,6 +249,11 @@
     .wa-fab-ping { animation: none; display: none; }
     .wa-panel { transition: opacity 160ms ease !important; transform: none !important; }
   }
+
+  /* servicios: las listas del hover llevan textos mas largos */
+  #servicios .service-overlay li { align-items: flex-start; }
+  #servicios .service-overlay li svg { margin-top: 3px; }
+  @media (min-width: 640px) { #servicios .reveal.group { min-height: 21rem; } }
 </style>
 </head>
 
@@ -273,6 +278,7 @@
     </div>
 
     <!-- TODO: reemplazar por los enlaces reales a redes sociales -->
+    <!-- REDES OCULTAS hasta que existan los perfiles (Instagram, LinkedIn, Facebook, TikTok, Behance). Restaurar este bloque cuando haya URLs reales.
     <div class="hidden sm:flex items-center gap-4 nav-text shrink-0">
       <a href="#" aria-label="Instagram" class="opacity-80 hover:opacity-100 transition-opacity">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg>
@@ -287,6 +293,7 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><text x="12" y="15.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" font-weight="700" fill="currentColor">Be</text></svg>
       </a>
     </div>
+    -->
 
     <button id="menu-btn" class="xl:hidden nav-text p-2 -mr-2" aria-label="Abrir menú" aria-expanded="false">
       <span id="menu-icon" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
@@ -338,7 +345,7 @@
         Diseñamos ciudad.<br>Construimos futuro.
       </h1>
       <p class="mt-6 text-base md:text-lg text-bone/70 max-w-xl leading-relaxed">
-        Diseño arquitectónico, urbanismo, consultorías, construcción, soluciones inmobiliarias y visualización — un solo equipo para todo el proceso, en cualquier lugar del territorio.
+        Diseño arquitectónico, urbanismo, consultorías, construcción, soluciones inmobiliarias y visualización — un solo equipo para todo el proceso.
       </p>
       <div class="mt-9 flex flex-wrap items-center gap-4">
         <a href="#portafolio" class="btn-press inline-flex items-center rounded-full bg-bone text-forest-950 text-[15px] font-medium px-6 py-3.5 hover:bg-white">
@@ -380,7 +387,7 @@
         <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-forest-600">Portafolio</p>
         <h2 class="mt-3 text-3xl md:text-4xl font-semibold tracking-tight leading-tight">Proyectos seleccionados</h2>
       </div>
-      <p class="text-muted text-[15px] max-w-sm">Una muestra de nuestro trabajo.</p>
+      <p class="text-muted text-[15px] max-w-sm">Proyectos desarrollados por los socios.</p>
     </div>
   </div>
 
@@ -402,16 +409,14 @@
       <div class="reveal group relative overflow-hidden rounded-2xl bg-white border border-ink/8 p-8 md:p-10 transition-[transform,box-shadow] duration-300 ease-[var(--ease-out)] hover:-translate-y-1 hover:scale-[1.03] hover:shadow-xl hover:shadow-forest-900/15 hover:z-10">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" class="text-forest-600"><path d="M4 21V9l8-5 8 5v12" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 21v-7h6v7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
         <h3 class="mt-6 text-xl font-semibold">Diseño arquitectónico</h3>
-        <p class="mt-2.5 text-muted text-[15px] leading-relaxed">Diseño integral para proyectos públicos, residenciales y comerciales.</p>
+        <p class="mt-2.5 text-muted text-[15px] leading-relaxed">Diseño integral para proyectos residenciales, comerciales e institucionales.</p>
 
         <div class="service-overlay absolute inset-0 p-8 md:p-10 flex flex-col justify-center bg-forest-950/90 backdrop-blur-md text-bone opacity-0 translate-y-1 transition-[opacity,transform] duration-300 ease-[var(--ease-out)] group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none">
           <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-forest-500">Incluye</p>
           <ul class="mt-3 grid gap-1.5 text-[13.5px] text-bone/90 leading-snug">
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Arquitectónico</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Paisajismo</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Mobiliario</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Modelos y recorridos 3D</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Building Information Modeling (BIM)</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Vivienda unifamiliar</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Multifamiliar y en serie</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Comercial e institucional</li>
           </ul>
         </div>
       </div>
@@ -426,8 +431,7 @@
           <ul class="mt-3 grid gap-1.5 text-[13.5px] text-bone/90 leading-snug">
             <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Diseño urbano</li>
             <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Espacio público</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Planes parciales y masterplan</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Movilidad y accesibilidad</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Consultoría en planificación</li>
           </ul>
         </div>
       </div>
@@ -435,17 +439,15 @@
       <div class="reveal group relative overflow-hidden rounded-2xl bg-white border border-ink/8 p-8 md:p-10 transition-[transform,box-shadow] duration-300 ease-[var(--ease-out)] hover:-translate-y-1 hover:scale-[1.03] hover:shadow-xl hover:shadow-forest-900/15 hover:z-10">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" class="text-forest-600"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 3h6v2H9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 11h8M8 15h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         <h3 class="mt-6 text-xl font-semibold">Consultorías</h3>
-        <p class="mt-2.5 text-muted text-[15px] leading-relaxed">Acompañamiento técnico y normativo en POT, licencias y viabilidad de proyectos.</p>
+        <p class="mt-2.5 text-muted text-[15px] leading-relaxed">Acompañamiento técnico y normativo en POT, viabilidad de proyectos y asesoría en trámites de licencia.</p>
 
         <div class="service-overlay absolute inset-0 p-8 md:p-10 flex flex-col justify-center bg-forest-950/90 backdrop-blur-md text-bone opacity-0 translate-y-1 transition-[opacity,transform] duration-300 ease-[var(--ease-out)] group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none">
           <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-forest-500">Incluye</p>
           <ul class="mt-3 grid gap-1.5 text-[13px] text-bone/90 leading-snug">
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Licencias de construcción</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Trámites de servicios públicos</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Interventorías</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Supervisión técnica NSR-10</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Presupuestos de obra</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Programaciones de obra</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Análisis normativo del predio (qué se puede construir y bajo qué condiciones)</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Cabida arquitectónica (cuántas unidades y qué área caben en un predio)</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Levantamiento arquitectónico</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Consultoría normativa puntual, incluida la asesoría a profesionales en trámites de licencia</li>
           </ul>
         </div>
       </div>
@@ -457,13 +459,11 @@
 
         <div class="service-overlay absolute inset-0 p-8 md:p-10 flex flex-col justify-center bg-forest-950/90 backdrop-blur-md text-bone opacity-0 translate-y-1 transition-[opacity,transform] duration-300 ease-[var(--ease-out)] group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none">
           <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-forest-500">Incluye</p>
-          <ul class="mt-3 grid gap-1.5 text-[13px] text-bone/90 leading-snug">
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Obras civiles</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Ampliaciones y reformas</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Instalaciones básicas</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Instalaciones especiales</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Adecuaciones</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Carpintería</li>
+          <ul class="mt-3 grid gap-1.5 text-[13.5px] text-bone/90 leading-snug">
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Obra nueva y obras civiles</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Reparaciones y adecuaciones</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Administración delegada</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Supervisión e interventoría</li>
           </ul>
         </div>
       </div>
@@ -471,15 +471,13 @@
       <div class="reveal group relative overflow-hidden rounded-2xl bg-white border border-ink/8 p-8 md:p-10 transition-[transform,box-shadow] duration-300 ease-[var(--ease-out)] hover:-translate-y-1 hover:scale-[1.03] hover:shadow-xl hover:shadow-forest-900/15 hover:z-10">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" class="text-forest-600"><path d="M4 10.5 12 4l8 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 9.5V20h12V9.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="15" r="1.8" stroke="currentColor" stroke-width="1.6"/></svg>
         <h3 class="mt-6 text-xl font-semibold">Soluciones inmobiliarias</h3>
-        <p class="mt-2.5 text-muted text-[15px] leading-relaxed">Desarrollo y gestión de proyectos inmobiliarios con visión de largo plazo.</p>
+        <p class="mt-2.5 text-muted text-[15px] leading-relaxed">Estudios y estructuración de proyectos inmobiliarios con visión de largo plazo.</p>
 
         <div class="service-overlay absolute inset-0 p-8 md:p-10 flex flex-col justify-center bg-forest-950/90 backdrop-blur-md text-bone opacity-0 translate-y-1 transition-[opacity,transform] duration-300 ease-[var(--ease-out)] group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none">
           <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-forest-500">Incluye</p>
           <ul class="mt-3 grid gap-1.5 text-[13.5px] text-bone/90 leading-snug">
             <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Estudios de viabilidad</li>
             <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Estructuración de proyectos</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Comercialización y preventa</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Gestión de proyectos inmobiliarios</li>
           </ul>
         </div>
       </div>
@@ -491,11 +489,14 @@
 
         <div class="service-overlay absolute inset-0 p-8 md:p-10 flex flex-col justify-center bg-forest-950/90 backdrop-blur-md text-bone opacity-0 translate-y-1 transition-[opacity,transform] duration-300 ease-[var(--ease-out)] group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none">
           <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-forest-500">Incluye</p>
-          <ul class="mt-3 grid gap-1.5 text-[13.5px] text-bone/90 leading-snug">
+          <ul class="mt-3 grid gap-1.5 text-[12.5px] text-bone/90 leading-snug">
             <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Renders fotorrealistas</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Recorridos virtuales 3D</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Animaciones arquitectónicas</li>
-            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Material gráfico para preventa</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Recorridos virtuales 3D y animaciones</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Paquetes de preventa (4 imágenes, 1 imagen 360° y video animación)</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Panorámicas 360°</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Vuelo de dron y video animado</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Arquitectura interactiva para salas de ventas</li>
+            <li class="flex items-center gap-2"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-forest-500 shrink-0"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Modelado 3D en Revit y SketchUp</li>
           </ul>
         </div>
       </div>
@@ -513,7 +514,7 @@
       </div>
       <div class="lg:col-span-6 lg:col-start-7 reveal">
         <p class="text-muted text-base md:text-lg leading-relaxed max-w-xl">
-          MESA URBANA SAS nace de la sociedad entre Helena Guerrero, Carlos Prada y Rafael Serrano, tres arquitectos convencidos de que urbanismo, diseño y construcción son parte de una misma conversación. Integramos normativa, diseño y ejecución en un solo equipo, en cualquier región del país: desde el primer trazo hasta la entrega de llaves, cada decisión responde a una visión compartida de calidad y permanencia.
+          Mesa Urbana S.A.S. nace de la sociedad entre Helena Guerrero, Carlos Prada y Rafael Serrano, tres arquitectos convencidos de que urbanismo, diseño y construcción son parte de una misma conversación. Integramos normativa, diseño y ejecución en un solo equipo: desde el primer trazo hasta la entrega de llaves, cada decisión responde a una visión compartida de calidad y permanencia.
         </p>
       </div>
     </div>
@@ -526,7 +527,7 @@
         </div>
         <div class="p-5">
           <h3 class="text-[15px] font-semibold">Arq. Helena Guerrero</h3>
-          <p class="mt-1 text-[13px] text-muted">Urbanismo · Socia fundadora</p>
+          <p class="mt-1 text-[13px] text-muted">Urbanismo y gerencia · Socia fundadora</p>
         </div>
       </button>
 
@@ -563,8 +564,8 @@
         <p class="mt-2 text-muted text-[14px] leading-relaxed">Renders de alto impacto para decidir y vender el proyecto antes de construirlo.</p>
       </div>
       <div>
-        <h4 class="text-[15px] font-semibold">Alcance nacional</h4>
-        <p class="mt-2 text-muted text-[14px] leading-relaxed">Trabajamos con la misma rigurosidad normativa en cualquier ciudad, municipio o zona rural del país.</p>
+        <h4 class="text-[15px] font-semibold">Viabilidad primero</h4>
+        <p class="mt-2 text-muted text-[14px] leading-relaxed">Revisamos norma, costo y construcción antes de comprometer el diseño.</p>
       </div>
     </div>
   </div>
@@ -576,6 +577,7 @@
     <div class="reveal max-w-2xl">
       <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-forest-600">Proceso</p>
       <h2 class="mt-3 text-3xl md:text-4xl font-semibold tracking-tight leading-tight">Cómo trabajamos, paso a paso.</h2>
+      <p class="mt-4 text-muted text-base leading-relaxed">Cada servicio sigue las etapas que necesita: un proyecto integral recorre las cuatro; una cabida o un levantamiento, solo las primeras.</p>
     </div>
 
     <div class="reveal mt-20 lg:mt-28 relative">
@@ -641,7 +643,7 @@
 </section>
 
 <!-- TESTIMONIOS -->
-<section id="testimonios" class="bg-bone">
+<section id="testimonios" class="bg-bone" hidden> <!-- Oculto hasta tener testimonios reales de clientes -->
   <div class="max-w-[1400px] mx-auto px-6 lg:px-10 py-24 lg:py-32">
     <div class="reveal max-w-2xl mx-auto text-center">
       <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-forest-600">Testimonios</p>
@@ -675,7 +677,7 @@
 </section>
 
 <!-- CLIENTES -->
-<section id="clientes" class="bg-white overflow-hidden">
+<section id="clientes" class="bg-white overflow-hidden" hidden> <!-- Oculto hasta tener los logos reales de clientes (hay autorizacion de Prisma; falta el archivo) -->
   <div class="max-w-[1400px] mx-auto px-6 lg:px-10 py-16 lg:py-20">
     <p class="reveal text-center font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Empresas con las que hemos trabajado</p>
 
@@ -722,6 +724,7 @@
         <div class="mt-10 space-y-4 text-[15px] text-bone/80">
           <p><span class="text-bone/45">Correo</span><br><a href="mailto:mesaurbana.arquitectura@gmail.com" class="hover:text-bone transition-colors">mesaurbana.arquitectura@gmail.com</a></p>
           <p><span class="text-bone/45">Teléfono</span><br><a href="tel:+573133201358" class="hover:text-bone transition-colors">+57 313 320 1358</a></p>
+          <p><span class="text-bone/45">Ubicación</span><br>Ibagué, Tolima</p>
         </div>
 
         <a href="https://wa.me/573133201358?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20proyecto" target="_blank" rel="noopener noreferrer" class="btn-press mt-6 inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white text-[13px] font-medium px-4 py-2.5 hover:brightness-95 w-fit">
@@ -766,6 +769,10 @@
             <label for="mensaje" class="text-[13px] text-bone/60">Mensaje</label>
             <textarea id="mensaje" name="mensaje" rows="4" required class="rounded-lg bg-bone/[0.06] border border-bone/15 px-4 py-3 text-[15px] placeholder:text-bone/30 focus:outline-none focus:border-forest-500 focus:ring-1 focus:ring-forest-500 resize-none" placeholder="Cuéntanos sobre tu proyecto"></textarea>
           </div>
+          <label for="autorizacion" class="text-[13px] text-bone/60 leading-relaxed" style="display:flex;align-items:flex-start;gap:0.75rem">
+            <input id="autorizacion" name="autorizacion_datos" type="checkbox" value="Sí" required class="mt-1 shrink-0" style="accent-color:#278860">
+            <span>Autorizo el tratamiento de mis datos personales conforme a la <a href="politica-de-datos.html" target="_blank" rel="noopener" class="hover:text-bone" style="text-decoration:underline">Política de Tratamiento de Datos</a>. Tus datos se usarán para responder tu solicitud.</span>
+          </label>
           <div id="form-msg" class="hidden text-[14px]" role="status" aria-live="polite"></div>
           <button type="submit" id="submit-btn" class="btn-press mt-1 inline-flex items-center justify-center rounded-full bg-bone text-forest-950 text-[15px] font-medium px-6 py-3.5 hover:bg-white w-fit">
             Enviar mensaje
@@ -784,9 +791,10 @@
         <img src="assets/isotipo.png" alt="" class="w-6 h-6 object-contain brand-mark on-dark" />
         <span class="text-[14px] font-semibold text-bone/85">Mesa Urbana</span>
       </div>
-      <p class="mt-4 text-[13px] leading-relaxed max-w-xs">MESA URBANA SAS — Arquitectura, urbanismo, construcción e inmobiliaria en todo el territorio.</p>
+      <p class="mt-4 text-[13px] leading-relaxed max-w-xs">Mesa Urbana S.A.S. — Arquitectura, urbanismo, construcción e inmobiliaria.</p>
       <!-- TODO: reemplazar por los enlaces reales a redes sociales -->
-      <div class="mt-5 flex items-center gap-3">
+      <!-- REDES OCULTAS hasta que existan los perfiles (Instagram, LinkedIn, Facebook, TikTok, Behance). Restaurar este bloque cuando haya URLs reales.
+    <div class="mt-5 flex items-center gap-3">
         <a href="#" aria-label="Instagram" class="btn-press w-9 h-9 rounded-full border border-bone/15 flex items-center justify-center hover:bg-bone/10">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg>
         </a>
@@ -803,6 +811,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 3v10.7a3 3 0 11-2.4-2.94" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 3c.4 2.1 2.1 3.7 4.2 3.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
+    -->
     </div>
 
     <div class="lg:col-span-2 lg:col-start-6">
@@ -821,6 +830,7 @@
         <a href="recursos.html" target="_blank" rel="noopener" class="hover:text-bone transition-colors">Recursos</a>
         <a href="blog.html" target="_blank" rel="noopener" class="hover:text-bone transition-colors">Blog</a>
         <a href="#contacto" class="hover:text-bone transition-colors">Contacto</a>
+        <a href="politica-de-datos.html" class="hover:text-bone transition-colors">Política de tratamiento de datos</a>
       </div>
     </div>
 
@@ -828,13 +838,13 @@
       <p class="text-[12px] uppercase tracking-[0.14em] text-bone/40 font-mono">Contacto</p>
       <div class="mt-4 flex flex-col gap-2.5 text-[13.5px]">
         <a href="mailto:mesaurbana.arquitectura@gmail.com" class="hover:text-bone transition-colors">mesaurbana.arquitectura@gmail.com</a>
+        <span>Ibagué, Tolima</span>
       </div>
     </div>
   </div>
   <div class="border-t border-bone/10">
     <div class="max-w-[1400px] mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px]">
       <span>© 2026 Mesa Urbana S.A.S. Todos los derechos reservados.</span>
-      <span class="text-bone/40">NIT 902.090.674</span>
     </div>
   </div>
 </footer>
@@ -858,9 +868,9 @@
     </div>
 
     <div id="modal-info" class="p-6 md:p-8">
-      <span id="modal-category" class="font-mono text-[11px] uppercase tracking-[0.18em] text-forest-500"></span>
+      <span id="modal-category" class="font-mono text-[11px] tracking-[0.18em] text-forest-500" style="text-transform:none"></span>
       <h3 id="modal-title" class="mt-2 text-2xl font-semibold tracking-tight"></h3>
-      <p id="modal-description" class="mt-2.5 text-[14px] text-bone/70 leading-relaxed max-w-lg"></p>
+      <p id="modal-description" class="mt-2.5 text-[14px] text-bone/70 leading-relaxed max-w-lg" style="white-space:pre-line"></p>
 
       <div id="modal-thumbs" class="mt-6 flex gap-2.5"></div>
     </div>
@@ -896,7 +906,7 @@
       </div>
       <div class="min-w-0">
         <p id="wa-panel-title" class="text-[14px] font-semibold truncate">Mesa Urbana</p>
-        <p class="text-[12px] text-bone/60">Normalmente responde en minutos</p>
+        <p class="text-[12px] text-bone/60">Normalmente responde en menos de una hora</p>
       </div>
       <button id="wa-panel-close" type="button" class="btn-press ml-auto w-8 h-8 rounded-full flex items-center justify-center hover:bg-bone/10 shrink-0" aria-label="Cerrar chat">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -1050,15 +1060,15 @@
   const projectsData = {
     'apto-torreon-santa-ana': { title: 'Apto Torreon Santa Ana', category: '', description: '', images: projectImages('apto-torreon-santa-ana', 6) },
     'banco-finandina': { title: 'Banco Finandina', category: '', description: '', images: projectImages('banco-finandina', 2) },
-    'casa-paipa': { title: 'Casa Paipa', category: '', description: '', images: projectImages('casa-paipa', 6) },
+    'casa-paipa': { title: 'Casa Paipa', category: 'Paipa, Boyacá · 2024 · 180 m²', description: 'Rol: visualización arquitectónica\nVivienda unifamiliar vacacional de 1 piso en parcelación rural. Mostrar el proyecto implantado en el terreno real permitió la aprobación del diseño y la contratación de su ejecución.', images: projectImages('casa-paipa', 6) },
     'cocina-concejo': { title: 'Cocina Concejo', category: '', description: '', images: projectImages('cocina-concejo', 5) },
     'edificio-belen-9-31': { title: 'Edificio Belen 9-31', category: '', description: '', images: projectImages('edificio-belen-9-31', 3) },
     'edificio-lmf-80': { title: 'Edificio LMF 80', category: '', description: '', images: projectImages('edificio-lmf-80', 11) },
     'hospital-villa-rica': { title: 'Hospital Villa Rica', category: '', description: '', images: projectImages('hospital-villa-rica', 4) },
     'oficina-ingenieria-sas': { title: 'Oficina Ingenieria SAS', category: '', description: '', images: projectImages('oficina-ingenieria-sas', 4) },
     'oficina-t-seis-arquitectos': { title: 'Oficina T Seis Arquitectos', category: '', description: '', images: projectImages('oficina-t-seis-arquitectos', 3) },
-    'restaurante-naruto': { title: 'Restaurante Naruto', category: '', description: '', images: projectImages('restaurante-naruto', 13) },
-    'serena-house': { title: 'Serena House', category: '', description: '', images: projectImages('serena-house', 4) },
+    'restaurante-naruto': { title: 'Restaurante Naruto', category: 'Ibagué · 2025 · aprox. 200 m²', description: 'Rol: equipo de diseño (con el arq. Daniel Caro) y visualización\nAmpliación de restaurante asiático con 2 pisos en la parte posterior. Se conservó la edificación existente con reforzamiento estructural; el dueño aprobó y construyó la primera etapa.', images: projectImages('restaurante-naruto', 13) },
+    'serena-house': { title: 'Serena House', category: 'Zona rural de Ibagué · 2025 · 90 m²', description: 'Rol: diseño y visualización\nCasa vacacional con fachada de cristal y estructura metálica orientada a un lago artificial. Diseño aprobado en menos de 3 semanas y entregado completo para construcción.', images: projectImages('serena-house', 4) },
   };
 
   const portfolioGrid = document.getElementById('portfolio-grid');
@@ -1200,21 +1210,21 @@
   const teamData = {
     helena: {
       name: 'Arq. Helena Guerrero',
-      role: 'Urbanismo · Socia fundadora',
+      role: 'Urbanismo y gerencia · Socia fundadora',
       photo: 'assets/equipo/helena-guerrero.jpg',
-      bio: 'Helena lidera los procesos de planeación urbana del estudio, articulando movilidad, espacio público y participación comunitaria en cada proyecto. Su trabajo parte de leer la ciudad existente antes de proponer una intervención: entender cómo se mueve la gente, dónde se encuentra y qué necesita un barrio para funcionar mejor. Ha dirigido planes maestros para plazas, corredores verdes y renovaciones de centros históricos, siempre con un enfoque que prioriza al peatón sobre el vehículo.',
+      bio: 'Helena es arquitecta y magíster en Urbanismo de la Universidad del Tolima, con cerca de diez años de experiencia en los sectores público y privado. Trabaja en normativa urbana, evaluación de viabilidad de proyectos frente al ordenamiento territorial, diseño urbano participativo y gestión de proyectos. En Mesa Urbana lidera la gerencia y la relación con los clientes.',
     },
     carlos: {
       name: 'Arq. Carlos Prada',
       role: 'Diseño · Socio fundador',
       photo: 'assets/equipo/carlos-prada.jpg',
-      bio: 'Carlos dirige el diseño arquitectónico del estudio, donde traduce el programa y las restricciones técnicas de cada proyecto en una propuesta espacial clara y con carácter propio. Cree que la buena arquitectura se sostiene en la relación entre proporción, luz y materialidad, más que en el gesto formal. Ha liderado el diseño de edificios corporativos, equipamientos y desarrollos residenciales, cuidando cada detalle desde el anteproyecto hasta la obra terminada.',
+      bio: 'Carlos es arquitecto con cerca de diez años de experiencia en arquitectura, urbanismo y ordenamiento territorial. Trabaja en normativa urbanística, revisión y formulación de planes parciales y diseño arquitectónico, con atención a la espacialidad, el paisaje y el espacio público. En Mesa Urbana dirige el diseño y la visualización arquitectónica, con imágenes fotorrealistas, presentaciones interactivas y audiovisuales.',
     },
     rafael: {
       name: 'Arq. Rafael Serrano',
       role: 'Construcción · Socio fundador',
       photo: 'assets/equipo/rafael-serrano.jpg',
-      bio: 'Rafael coordina la ejecución de obra del estudio, garantizando que cada proyecto se construya con los estándares de calidad, tiempo y presupuesto acordados. Su labor conecta el diseño con la realidad del sitio: coordina cuadrillas, interventoría técnica y proveedores para que lo dibujado se materialice sin perder precisión. Tiene experiencia dirigiendo obras de mediana y gran escala, desde cimentación hasta entrega final, con un enfoque estricto en seguridad y control de calidad.',
+      bio: 'Rafael es arquitecto con más de diez años de experiencia en diseño, construcción, supervisión e interventoría de proyectos, en el sector público y privado. Trabaja en edificación residencial, presupuestos y control de costos, coordinación técnica, seguimiento de obra y diagnóstico de patologías constructivas. En Mesa Urbana dirige la operación de las obras: materiales, proveedores, personal y cronograma.',
     },
   };
 

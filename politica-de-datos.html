@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Recursos gratuitos — Mesa Urbana S.A.S.</title>
-<meta name="description" content="Guías, checklists y plantillas gratuitas sobre normativa, diseño, construcción y visualización arquitectónica." />
+<title>Política de tratamiento de datos — Mesa Urbana S.A.S.</title>
+<meta name="description" content="Política de tratamiento de datos personales de Mesa Urbana S.A.S." />
 
 <link rel="icon" type="image/png" href="assets/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png" />
@@ -13,13 +13,13 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Mesa Urbana S.A.S" />
 <meta property="og:locale" content="es_CO" />
-<meta property="og:title" content="Recursos gratuitos — Mesa Urbana S.A.S." />
-<meta property="og:description" content="Guías, checklists y plantillas gratuitas sobre normativa, diseño, construcción y visualización arquitectónica." />
+<meta property="og:title" content="Política de tratamiento de datos — Mesa Urbana S.A.S." />
+<meta property="og:description" content="Política de tratamiento de datos personales de Mesa Urbana S.A.S." />
 <meta property="og:image" content="assets/og-image.png" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Recursos gratuitos — Mesa Urbana S.A.S." />
-<meta name="twitter:description" content="Guías, checklists y plantillas gratuitas sobre normativa, diseño, construcción y visualización arquitectónica." />
+<meta name="twitter:title" content="Política de tratamiento de datos — Mesa Urbana S.A.S." />
+<meta name="twitter:description" content="Política de tratamiento de datos personales de Mesa Urbana S.A.S." />
 <meta name="twitter:image" content="assets/og-image.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,6 +50,31 @@
     .card-hover:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -16px rgba(10,42,31,0.20); }
   }
 
+  /* image zoom + black&white-to-color reveal inside blog cards */
+  .zoom-img { transition: transform 500ms var(--ease-in-out); }
+  .duotone { transition: filter 450ms var(--ease-in-out); }
+  .duotone-overlay { transition: opacity 450ms var(--ease-in-out); }
+  @media (hover: hover) and (pointer: fine) {
+    .zoom-parent:hover .zoom-img { transform: scale(1.045); }
+    .zoom-parent:hover .duotone { filter: grayscale(0) contrast(1.02) brightness(1); }
+    .zoom-parent:hover .duotone-overlay { opacity: 0; }
+  }
+  .duotone {
+    filter: grayscale(1) contrast(1.05) brightness(0.9);
+    position: relative;
+  }
+  .duotone-overlay {
+    background: linear-gradient(160deg, rgba(10,42,31,0.55), rgba(30,107,76,0.35));
+    mix-blend-mode: multiply;
+  }
+  /* touch devices can't hover to reveal color — show it by default instead */
+  @media (hover: none) {
+    .zoom-parent .duotone { filter: grayscale(0) contrast(1.02) brightness(1); }
+    .zoom-parent .duotone-overlay { opacity: 0; }
+    .card-hover, .zoom-parent { transition: transform 160ms var(--ease-out); }
+    .card-hover:active, .zoom-parent:active { transform: scale(0.98); }
+  }
+
   /* mobile menu: animated open/close via grid-rows (no fixed-height guessing) */
   #mobile-menu { display: grid; grid-template-rows: minmax(0, 0fr); transition: grid-template-rows 220ms var(--ease-out); min-height: 0; }
   #mobile-menu.is-open { grid-template-rows: minmax(0, 1fr); transition-duration: 260ms; }
@@ -72,42 +97,38 @@
   input, textarea, select { transition: border-color 150ms ease, box-shadow 150ms ease; }
 
   /* shared lightbox / modal motion language */
-  #resource-modal {
+  #blog-modal {
     transition: background-color 260ms var(--ease-out), backdrop-filter 260ms var(--ease-out);
     background-color: rgba(10,42,31,0); backdrop-filter: blur(0px);
   }
-  #resource-modal.is-open {
+  #blog-modal.is-open {
     background-color: rgba(10,42,31,0.72); backdrop-filter: blur(14px);
   }
-  #resource-modal-panel {
+  #blog-modal-panel {
     opacity: 0; transform: scale(0.95); transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out);
   }
-  #resource-modal.is-open #resource-modal-panel {
+  #blog-modal.is-open #blog-modal-panel {
     opacity: 1; transform: scale(1);
   }
-  #resource-modal:not(.is-open) { transition-duration: 180ms; }
-  #resource-modal:not(.is-open) #resource-modal-panel { transition-duration: 160ms; }
+  #blog-modal:not(.is-open) { transition-duration: 180ms; }
+  #blog-modal:not(.is-open) #blog-modal-panel { transition-duration: 160ms; }
+
+  #blog-modal-image { transition: opacity 180ms ease, filter 180ms ease; }
 
   .nav-scrolled { background: rgba(244,246,243,0.85); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(16,20,15,0.06); }
 
   .brand-mark { transition: filter .3s ease; }
   .brand-mark.on-dark { filter: brightness(0) invert(1); }
 
-  /* filter pills */
-  .filter-pill { transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease; }
-
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .zoom-img { transition: none !important; }
     @media (hover: hover) and (pointer: fine) {
+      .zoom-parent:hover .zoom-img { transform: none !important; }
       .card-hover:hover { transform: none !important; }
     }
-    #resource-modal-panel { transition: opacity 160ms ease !important; transform: none !important; }
+    #blog-modal-panel { transition: opacity 160ms ease !important; transform: none !important; }
     html { scroll-behavior: auto; }
-  }
-
-  @media (hover: none) {
-    .card-hover, .zoom-parent { transition: transform 160ms var(--ease-out); }
-    .card-hover:active, .zoom-parent:active { transform: scale(0.98); }
   }
 
   /* WhatsApp floating widget */
@@ -145,7 +166,7 @@
       <a href="index.html#portafolio" class="opacity-80 hover:opacity-100 transition-opacity">Portafolio</a>
       <a href="index.html#servicios" class="opacity-80 hover:opacity-100 transition-opacity">Servicios</a>
       <a href="index.html#nosotros" class="opacity-80 hover:opacity-100 transition-opacity">Quiénes somos</a>
-      <a href="recursos.html" target="_blank" rel="noopener" class="opacity-100">Recursos</a>
+      <a href="recursos.html" target="_blank" rel="noopener" class="opacity-80 hover:opacity-100 transition-opacity">Recursos</a>
       <a href="blog.html" target="_blank" rel="noopener" class="opacity-80 hover:opacity-100 transition-opacity">Blog</a>
       <a href="index.html#contacto" class="opacity-80 hover:opacity-100 transition-opacity">Contacto</a>
     </div>
@@ -189,26 +210,60 @@
 <!-- clears the fixed header — this page has no hero behind it -->
 <div class="h-20" aria-hidden="true"></div>
 
-<!-- RECURSOS -->
-<section id="recursos" class="bg-white">
+<!-- POLITICA DE DATOS -->
+<section id="politica" class="bg-bone">
   <div class="max-w-[1400px] mx-auto px-6 lg:px-10 py-16 lg:py-24">
-    <div class="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-      <div class="max-w-xl">
-        <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-forest-600">Recursos</p>
-        <h1 class="mt-3 text-3xl md:text-4xl font-semibold tracking-tight leading-tight">Guías y plantillas gratuitas.</h1>
+    <div class="reveal max-w-3xl">
+      <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-forest-600">Legal</p>
+      <h1 class="mt-3 text-3xl md:text-4xl font-semibold tracking-tight leading-tight">Política de Tratamiento de Datos Personales</h1>
+      <p class="mt-3 text-muted text-[15px]">Mesa Urbana S.A.S. · Última actualización: septiembre de 2026</p>
+      <div class="mt-10 grid gap-8 text-[15px] text-ink/80 leading-relaxed">
+        <div>
+          <h2 class="text-lg font-semibold text-ink">1. Responsable del tratamiento</h2>
+          <p class="mt-2">Mesa Urbana S.A.S., con domicilio en Ibagué, Tolima. Correo electrónico: <a href="mailto:mesaurbana.arquitectura@gmail.com" class="hover:text-forest-600" style="text-decoration:underline">mesaurbana.arquitectura@gmail.com</a>. Teléfono: +57 313 320 1358.</p>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold text-ink">2. Marco legal</h2>
+          <p class="mt-2">Esta política se adopta conforme a la Ley 1581 de 2012, el Decreto 1377 de 2013 (compilado en el Decreto 1074 de 2015) y las normas que los modifiquen o complementen.</p>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold text-ink">3. Datos que se recogen</h2>
+          <p class="mt-2">A través del formulario de contacto: nombre, correo electrónico, teléfono (opcional), servicio de interés y el mensaje que la persona escriba. Cuando la persona decide escribir por WhatsApp, Mesa Urbana recibe el número desde el que escribe y el contenido del mensaje. No se solicitan datos sensibles ni datos de niños, niñas o adolescentes.</p>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold text-ink">4. Finalidades</h2>
+          <p class="mt-2">Los datos se usan para responder consultas y solicitudes, preparar y enviar propuestas de servicios, y mantener la comunicación sobre el servicio consultado. No se venden ni se ceden a terceros con fines comerciales.</p>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold text-ink">5. Autorización</h2>
+          <p class="mt-2">Al marcar la casilla del formulario y enviarlo, la persona autoriza de manera previa, expresa e informada el tratamiento de sus datos para las finalidades descritas. Quien escribe por WhatsApp o por correo lo hace por iniciativa propia, y sus datos se usan solo para atender ese contacto.</p>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold text-ink">6. Derechos del titular</h2>
+          <p class="mt-2">Conocer, actualizar y rectificar sus datos; solicitar prueba de la autorización; ser informado sobre el uso que se ha dado a sus datos; presentar quejas ante la Superintendencia de Industria y Comercio; revocar la autorización y solicitar la supresión de sus datos cuando no se respeten los principios, derechos y garantías legales; y acceder de forma gratuita a sus datos.</p>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold text-ink">7. Cómo ejercer los derechos</h2>
+          <p class="mt-2">Mediante un correo a <a href="mailto:mesaurbana.arquitectura@gmail.com" class="hover:text-forest-600" style="text-decoration:underline">mesaurbana.arquitectura@gmail.com</a>, con el nombre completo, un dato de contacto y la solicitud. Las consultas se responden en un máximo de diez (10) días hábiles y los reclamos en un máximo de quince (15) días hábiles, contados desde el recibo de la solicitud, prorrogables en los casos y por los términos que establece la ley.</p>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold text-ink">8. Proveedores</h2>
+          <p class="mt-2">El formulario se procesa mediante Formspree, proveedor tecnológico que puede almacenar datos fuera de Colombia y que entrega el mensaje al correo de Mesa Urbana. Los datos se comparten con este proveedor únicamente para prestar ese servicio.</p>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold text-ink">9. Conservación</h2>
+          <p class="mt-2">Los datos se conservan durante el tiempo necesario para las finalidades descritas y para cumplir obligaciones legales o contractuales. Después se suprimen o se anonimizan.</p>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold text-ink">10. Seguridad</h2>
+          <p class="mt-2">Mesa Urbana adopta medidas técnicas y administrativas razonables para proteger los datos contra acceso no autorizado, pérdida o alteración.</p>
+        </div>
+        <div>
+          <h2 class="text-lg font-semibold text-ink">11. Cambios</h2>
+          <p class="mt-2">Cualquier cambio se publica en esta página con su fecha de actualización.</p>
+        </div>
       </div>
-      <p class="text-muted text-[15px] max-w-sm">Material práctico sobre normativa, diseño, construcción y visualización.</p>
     </div>
-
-    <div class="reveal mt-10 flex flex-wrap gap-2.5" id="resource-filters">
-      <button type="button" data-filter="todos" class="resource-filter filter-pill is-active btn-press rounded-full border px-4 py-2 text-[13px] font-medium">Todos</button>
-      <button type="button" data-filter="normativa" class="resource-filter filter-pill btn-press rounded-full border px-4 py-2 text-[13px] font-medium">Normativa</button>
-      <button type="button" data-filter="diseno" class="resource-filter filter-pill btn-press rounded-full border px-4 py-2 text-[13px] font-medium">Diseño</button>
-      <button type="button" data-filter="visualizacion" class="resource-filter filter-pill btn-press rounded-full border px-4 py-2 text-[13px] font-medium">Visualización</button>
-      <button type="button" data-filter="construccion" class="resource-filter filter-pill btn-press rounded-full border px-4 py-2 text-[13px] font-medium">Construcción</button>
-    </div>
-
-    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="resource-grid"></div>
   </div>
 </section>
 
@@ -276,30 +331,6 @@
     </div>
   </div>
 </footer>
-
-<!-- RESOURCE MODAL -->
-<div id="resource-modal" class="hidden fixed inset-0 z-[100] items-center justify-center p-4 sm:p-8" role="dialog" aria-modal="true" aria-labelledby="resource-modal-title">
-  <div id="resource-modal-panel" class="relative w-full max-w-md rounded-2xl bg-white border border-ink/10 overflow-hidden">
-    <button id="resource-modal-close" type="button" class="btn-press absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white/80 border border-ink/10 flex items-center justify-center" aria-label="Cerrar">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-    </button>
-
-    <div class="p-7 md:p-9">
-      <span id="resource-modal-category" class="font-mono text-[11px] uppercase tracking-[0.18em] text-forest-600"></span>
-      <h3 id="resource-modal-title" class="mt-2 text-xl font-semibold tracking-tight"></h3>
-      <p id="resource-modal-description" class="mt-3 text-muted text-[14px] leading-relaxed"></p>
-
-      <p class="mt-6 text-[15px] text-ink/80 leading-relaxed">Este recurso estará disponible próximamente.</p>
-
-      <form id="resource-form" class="mt-6 grid gap-3" onsubmit="return false;" style="display:none" hidden>
-        <label for="resource-email" class="text-[13px] text-muted">Tu correo, para enviarte el recurso</label>
-        <input id="resource-email" type="email" required autocomplete="email" placeholder="tu@correo.com" class="rounded-lg border border-ink/15 px-4 py-3 text-[15px] focus:outline-none focus:border-forest-500 focus:ring-1 focus:ring-forest-500">
-        <button type="submit" class="btn-press mt-1 inline-flex items-center justify-center rounded-full bg-forest-600 text-bone text-[15px] font-medium px-6 py-3.5 hover:bg-forest-500">Descargar recurso</button>
-        <p id="resource-form-msg" class="hidden text-[13px] text-forest-600 mt-1"></p>
-      </form>
-    </div>
-  </div>
-</div>
 
 <!-- WHATSAPP FLOATING WIDGET -->
 <div class="wa-widget fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-[90] flex flex-col items-end gap-3">
@@ -385,138 +416,6 @@
       first.focus();
     }
   }
-
-  // generic filter-pill active state helper
-  function setActivePill(buttons, activeBtn) {
-    buttons.forEach(btn => {
-      const isActive = btn === activeBtn;
-      btn.classList.toggle('is-active', isActive);
-      btn.classList.toggle('bg-forest-600', isActive);
-      btn.classList.toggle('text-bone', isActive);
-      btn.classList.toggle('border-forest-600', isActive);
-      btn.classList.toggle('border-ink/12', !isActive);
-      btn.classList.toggle('text-ink/70', !isActive);
-    });
-  }
-  document.querySelectorAll('.filter-pill:not(.is-active)').forEach(btn => {
-    btn.classList.add('border-ink/12', 'text-ink/70');
-  });
-  document.querySelectorAll('.filter-pill.is-active').forEach(btn => {
-    btn.classList.add('bg-forest-600', 'text-bone', 'border-forest-600');
-  });
-
-  // ---- RECURSOS: data, render, filter, modal ----
-  const iconChecklist = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 3h6v2H9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m8.3 11.3 1.4 1.4 2.6-2.9M8.3 15.8l1.4 1.4 2.6-2.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  const iconDocument = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v13H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 12.5h6M9.5 15.5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
-  const iconTemplate = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="8" height="6" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="4" width="8" height="10" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="12" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="16" width="8" height="4" rx="1" stroke="currentColor" stroke-width="1.6"/></svg>';
-  const iconBook = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H12v16H5.5C4.7 20 4 19.3 4 18.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H12v16h6.5c.8 0 1.5-.7 1.5-1.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
-  const iconImage = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="1.5" stroke="currentColor" stroke-width="1.6"/><circle cx="8.5" cy="9.5" r="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M3 15l5-4 4 3 4-5 5 6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>';
-
-  const resourcesData = [
-    { slug: 'checklist-licencia-construccion', category: 'normativa', categoryLabel: 'Normativa', icon: iconChecklist, nuevo: true, title: 'Checklist: trámite de licencia de construcción', description: 'Pasos, requisitos y entidades para no perder tiempo en el proceso.' },
-    { slug: 'guia-pot-simple', category: 'normativa', categoryLabel: 'Normativa', icon: iconDocument, nuevo: false, title: 'Guía: el POT y los índices de ocupación, explicados simple', description: 'Qué significan índice de ocupación y de construcción y cómo afectan tu proyecto.' },
-    { slug: 'plantilla-programa-arquitectonico', category: 'diseno', categoryLabel: 'Diseño', icon: iconTemplate, nuevo: true, title: 'Plantilla de programa arquitectónico', description: 'Estructura base para organizar áreas, usos y relaciones de tu proyecto.' },
-    { slug: 'checklist-recepcion-obra', category: 'construccion', categoryLabel: 'Construcción', icon: iconChecklist, nuevo: false, title: 'Checklist de recepción de obra', description: 'Puntos clave a verificar antes de recibir un proyecto construido.' },
-    { slug: 'glosario-urbanistico', category: 'normativa', categoryLabel: 'Normativa', icon: iconBook, nuevo: false, title: 'Glosario de términos urbanísticos', description: 'Los términos técnicos más usados en normativa y planeación, en lenguaje simple.' },
-    { slug: 'muestras-visualizacion', category: 'visualizacion', categoryLabel: 'Visualización', icon: iconImage, nuevo: false, title: 'Muestras de visualización en alta resolución', description: 'Selección de renders del estudio en calidad de impresión.' },
-  ];
-
-  const resourceGrid = document.getElementById('resource-grid');
-  resourcesData.forEach(res => {
-    const card = document.createElement('button');
-    card.type = 'button';
-    card.dataset.resource = res.slug;
-    card.dataset.category = res.category;
-    card.className = 'resource-item reveal card-hover text-left rounded-2xl border border-ink/8 p-7 bg-bone flex flex-col relative';
-    card.innerHTML = `
-      ${res.nuevo ? '<span class="absolute top-5 right-5 font-mono text-[10px] uppercase tracking-[0.14em] bg-forest-600 text-bone rounded-full px-2.5 py-1">Nuevo</span>' : ''}
-      <span class="w-11 h-11 rounded-xl bg-forest-600/10 text-forest-600 flex items-center justify-center">${res.icon}</span>
-      <h3 class="mt-5 text-[16px] font-semibold leading-snug pr-8">${res.title}</h3>
-      <p class="mt-2 text-muted text-[13.5px] leading-relaxed flex-1">${res.description}</p>
-      <span class="mt-5 inline-flex items-center gap-1.5 text-forest-600 text-[13px] font-medium">Descargar
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>`;
-    resourceGrid.appendChild(card);
-    io.observe(card);
-  });
-
-  const resourceFilterBtns = Array.from(document.querySelectorAll('.resource-filter'));
-  function applyResourceFilter(filter) {
-    const btn = resourceFilterBtns.find(b => b.dataset.filter === filter) || resourceFilterBtns[0];
-    setActivePill(resourceFilterBtns, btn);
-    document.querySelectorAll('.resource-item').forEach(item => {
-      const show = filter === 'todos' || item.dataset.category === filter;
-      item.classList.toggle('hidden', !show);
-    });
-  }
-  resourceFilterBtns.forEach(btn => btn.addEventListener('click', () => applyResourceFilter(btn.dataset.filter)));
-
-  const resourceModal = document.getElementById('resource-modal');
-  const resourceModalCategory = document.getElementById('resource-modal-category');
-  const resourceModalTitle = document.getElementById('resource-modal-title');
-  const resourceModalDescription = document.getElementById('resource-modal-description');
-  const resourceModalClose = document.getElementById('resource-modal-close');
-  const resourceForm = document.getElementById('resource-form');
-  const resourceFormMsg = document.getElementById('resource-form-msg');
-  let lastFocusedResourceEl = null;
-
-  function openResourceModal(slug, triggerEl) {
-    const res = resourcesData.find(r => r.slug === slug);
-    if (!res) return;
-    lastFocusedResourceEl = triggerEl || document.activeElement;
-
-    resourceModalCategory.textContent = res.categoryLabel;
-    resourceModalTitle.textContent = res.title;
-    resourceModalDescription.textContent = res.description;
-    resourceForm.reset();
-    resourceFormMsg.classList.add('hidden');
-    resourceForm.classList.remove('hidden');
-
-    resourceModal.classList.remove('hidden');
-    resourceModal.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-    requestAnimationFrame(() => resourceModal.classList.add('is-open'));
-    resourceModalClose.focus();
-    history.replaceState(null, '', `#recurso-${slug}`);
-  }
-
-  function closeResourceModal() {
-    resourceModal.classList.remove('is-open');
-    document.body.style.overflow = '';
-    const durationMs = prefersReducedMotion ? 0 : 200;
-    setTimeout(() => {
-      resourceModal.classList.add('hidden');
-      resourceModal.classList.remove('flex');
-    }, durationMs);
-    if (lastFocusedResourceEl) lastFocusedResourceEl.focus();
-    history.replaceState(null, '', location.pathname + location.search);
-  }
-
-  resourceGrid.addEventListener('click', (e) => {
-    const card = e.target.closest('[data-resource]');
-    if (card) openResourceModal(card.dataset.resource, card);
-  });
-  resourceModalClose.addEventListener('click', closeResourceModal);
-  resourceModal.addEventListener('click', (e) => { if (e.target === resourceModal) closeResourceModal(); });
-  resourceForm.addEventListener('submit', () => {
-    resourceFormMsg.textContent = 'Demo: en producción, este formulario capturaría tu correo y enviaría el PDF real — conéctalo a tu proveedor de email marketing para activarlo.';
-    resourceFormMsg.classList.remove('hidden');
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (resourceModal.classList.contains('hidden')) return;
-    if (e.key === 'Escape') closeResourceModal();
-    if (e.key === 'Tab') trapTabKey(e, resourceModal);
-  });
-
-  // open a resource modal directly from a shared hash link (#recurso-slug)
-  (function handleInitialHash() {
-    const hash = location.hash.replace('#', '');
-    if (hash.startsWith('recurso-')) {
-      const slug = hash.replace('recurso-', '');
-      if (resourcesData.some(r => r.slug === slug)) openResourceModal(slug);
-    }
-  })();
 
   // WhatsApp floating widget
   const waFab = document.getElementById('wa-fab');
