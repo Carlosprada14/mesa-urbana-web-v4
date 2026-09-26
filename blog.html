@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Blog — Mesa Urbana S.A.S.</title>
+<meta name="description" content="Artículos de los socios de Mesa Urbana sobre normativa, diseño, urbanismo, visualización y construcción." />
+
+<link rel="icon" type="image/png" href="assets/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Mesa Urbana S.A.S" />
+<meta property="og:locale" content="es_CO" />
+<meta property="og:title" content="Blog — Mesa Urbana S.A.S." />
+<meta property="og:description" content="Artículos de los socios de Mesa Urbana sobre normativa, diseño, urbanismo, visualización y construcción." />
+<meta property="og:image" content="assets/og-image.png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Blog — Mesa Urbana S.A.S." />
+<meta name="twitter:description" content="Artículos de los socios de Mesa Urbana sobre normativa, diseño, urbanismo, visualización y construcción." />
+<meta name="twitter:image" content="assets/og-image.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/styles.css">
+
+<style>
+  :root {
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: #F4F6F3; color: #10140F; }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* press feedback for buttons/CTAs */
+  .btn-press { transition: transform 160ms var(--ease-out), background-color 200ms ease, border-color 200ms ease, opacity 200ms ease, color 200ms ease; }
+  .btn-press:active { transform: scale(0.97); }
+
+  /* lift feedback for cards (fine pointer only — avoids sticky hover on touch) */
+  .card-hover { transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out); }
+  @media (hover: hover) and (pointer: fine) {
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -16px rgba(10,42,31,0.20); }
+  }
+
+  /* image zoom + black&white-to-color reveal inside blog cards */
+  .zoom-img { transition: transform 500ms var(--ease-in-out); }
+  .duotone { transition: filter 450ms var(--ease-in-out); }
+  .duotone-overlay { transition: opacity 450ms var(--ease-in-out); }
+  @media (hover: hover) and (pointer: fine) {
+    .zoom-parent:hover .zoom-img { transform: scale(1.045); }
+    .zoom-parent:hover .duotone { filter: grayscale(0) contrast(1.02) brightness(1); }
+    .zoom-parent:hover .duotone-overlay { opacity: 0; }
+  }
+  .duotone {
+    filter: grayscale(1) contrast(1.05) brightness(0.9);
+    position: relative;
+  }
+  .duotone-overlay {
+    background: linear-gradient(160deg, rgba(10,42,31,0.55), rgba(30,107,76,0.35));
+    mix-blend-mode: multiply;
+  }
+  /* touch devices can't hover to reveal color — show it by default instead */
+  @media (hover: none) {
+    .zoom-parent .duotone { filter: grayscale(0) contrast(1.02) brightness(1); }
+    .zoom-parent .duotone-overlay { opacity: 0; }
+    .card-hover, .zoom-parent { transition: transform 160ms var(--ease-out); }
+    .card-hover:active, .zoom-parent:active { transform: scale(0.98); }
+  }
+
+  /* mobile menu: animated open/close via grid-rows (no fixed-height guessing) */
+  #mobile-menu { display: grid; grid-template-rows: minmax(0, 0fr); transition: grid-template-rows 220ms var(--ease-out); min-height: 0; }
+  #mobile-menu.is-open { grid-template-rows: minmax(0, 1fr); transition-duration: 260ms; }
+  #mobile-menu > div { overflow: hidden; min-height: 0; }
+  @media (min-width: 1280px) {
+    #mobile-menu { display: none; }
+  }
+  #mobile-menu a { opacity: 0; transform: translateY(-6px); transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); }
+  #mobile-menu.is-open a { opacity: 1; transform: translateY(0); }
+  #mobile-menu.is-open a:nth-child(1) { transition-delay: 40ms; }
+  #mobile-menu.is-open a:nth-child(2) { transition-delay: 60ms; }
+  #mobile-menu.is-open a:nth-child(3) { transition-delay: 80ms; }
+  #mobile-menu.is-open a:nth-child(4) { transition-delay: 100ms; }
+  #mobile-menu.is-open a:nth-child(5) { transition-delay: 120ms; }
+  #mobile-menu.is-open a:nth-child(6) { transition-delay: 140ms; }
+  #mobile-menu.is-open a:nth-child(7) { transition-delay: 160ms; }
+  #menu-icon { transition: transform 220ms var(--ease-out); }
+  #menu-btn.is-open #menu-icon { transform: rotate(90deg); }
+
+  input, textarea, select { transition: border-color 150ms ease, box-shadow 150ms ease; }
+
+  /* shared lightbox / modal motion language */
+  #blog-modal {
+    transition: background-color 260ms var(--ease-out), backdrop-filter 260ms var(--ease-out);
+    background-color: rgba(10,42,31,0); backdrop-filter: blur(0px);
+  }
+  #blog-modal.is-open {
+    background-color: rgba(10,42,31,0.72); backdrop-filter: blur(14px);
+  }
+  #blog-modal-panel {
+    opacity: 0; transform: scale(0.95); transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out);
+  }
+  #blog-modal.is-open #blog-modal-panel {
+    opacity: 1; transform: scale(1);
+  }
+  #blog-modal:not(.is-open) { transition-duration: 180ms; }
+  #blog-modal:not(.is-open) #blog-modal-panel { transition-duration: 160ms; }
+
+  #blog-modal-image { transition: opacity 180ms ease, filter 180ms ease; }
+
+  .nav-scrolled { background: rgba(244,246,243,0.85); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(16,20,15,0.06); }
+
+  .brand-mark { transition: filter .3s ease; }
+  .brand-mark.on-dark { filter: brightness(0) invert(1); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .zoom-img { transition: none !important; }
+    @media (hover: hover) and (pointer: fine) {
+      .zoom-parent:hover .zoom-img { transform: none !important; }
+      .card-hover:hover { transform: none !important; }
+    }
+    #blog-modal-panel { transition: opacity 160ms ease !important; transform: none !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* WhatsApp floating widget */
+  /* the wrapper sizes itself to fit the (usually invisible) chat panel, leaving a large
+     invisible clickable area over whatever content sits behind it — only the fab/open
+     panel should actually catch taps */
+  .wa-widget { pointer-events: none; }
+  .wa-widget #wa-fab { pointer-events: auto; }
+  .wa-panel { opacity: 0; transform: scale(0.92) translateY(12px); pointer-events: none; transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out); }
+  .wa-panel.is-open { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+  .wa-fab-ping { animation: wa-ping 2.4s cubic-bezier(0,0,0.2,1) 3 forwards; }
+  @keyframes wa-ping {
+    0% { transform: scale(1); opacity: 0.55; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wa-fab-ping { animation: none; display: none; }
+    .wa-panel { transition: opacity 160ms ease !important; transform: none !important; }
+  }
+</style>
+</head>
+
+<body class="antialiased">
+
+<!-- NAV -->
+<header id="site-nav" class="nav-scrolled fixed top-0 inset-x-0 z-50">
+  <nav class="max-w-[1400px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between gap-6">
+    <a href="index.html" class="flex items-center gap-3 shrink-0" aria-label="Mesa Urbana — inicio">
+      <img src="assets/isotipo.png" alt="" class="w-[64px] h-[64px] object-contain brand-mark" />
+      <img src="assets/wordmark.png" alt="Mesa Urbana" class="h-[46px] w-auto object-contain brand-mark" />
+    </a>
+
+    <div class="hidden xl:flex items-center gap-6 text-[13.5px] font-medium text-ink">
+      <a href="index.html#top" class="opacity-80 hover:opacity-100 transition-opacity">Inicio</a>
+      <a href="index.html#portafolio" class="opacity-80 hover:opacity-100 transition-opacity">Portafolio</a>
+      <a href="index.html#servicios" class="opacity-80 hover:opacity-100 transition-opacity">Servicios</a>
+      <a href="index.html#nosotros" class="opacity-80 hover:opacity-100 transition-opacity">Quiénes somos</a>
+      <a href="recursos.html" target="_blank" rel="noopener" class="opacity-80 hover:opacity-100 transition-opacity">Recursos</a>
+      <a href="blog.html" target="_blank" rel="noopener" class="opacity-100">Blog</a>
+      <a href="index.html#contacto" class="opacity-80 hover:opacity-100 transition-opacity">Contacto</a>
+    </div>
+
+    <!-- TODO: reemplazar por los enlaces reales a redes sociales -->
+    <div class="hidden sm:flex items-center gap-4 text-ink shrink-0">
+      <a href="#" aria-label="Instagram" class="opacity-80 hover:opacity-100 transition-opacity">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg>
+      </a>
+      <a href="#" aria-label="Facebook" class="opacity-80 hover:opacity-100 transition-opacity">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="1.6"/><path d="M13.4 20v-6.6h2.1l.3-2.5h-2.4V9.2c0-.7.2-1.2 1.2-1.2h1.3V5.8c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.15-3.2 3.27v1.83H8.7v2.5h2.1V20" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#" aria-label="LinkedIn" class="opacity-80 hover:opacity-100 transition-opacity">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M7.5 10v6.5M7.5 7.2v.1M11 16.5V13c0-1.4 1-2.4 2.2-2.4 1.2 0 2 .8 2 2.3v3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </a>
+      <a href="#" aria-label="Behance" class="opacity-80 hover:opacity-100 transition-opacity">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><text x="12" y="15.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" font-weight="700" fill="currentColor">Be</text></svg>
+      </a>
+    </div>
+
+    <button id="menu-btn" class="xl:hidden text-ink p-2 -mr-2" aria-label="Abrir menú" aria-expanded="false">
+      <span id="menu-icon" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="xl:hidden bg-bone border-t border-ink/10">
+    <div class="px-6 py-5 flex flex-col gap-4 text-[15px] font-medium text-ink">
+      <a href="index.html#top">Inicio</a>
+      <a href="index.html#portafolio">Portafolio</a>
+      <a href="index.html#servicios">Servicios</a>
+      <a href="index.html#nosotros">Quiénes somos</a>
+      <a href="recursos.html" target="_blank" rel="noopener">Recursos</a>
+      <a href="blog.html" target="_blank" rel="noopener">Blog</a>
+      <a href="index.html#contacto">Contacto</a>
+    </div>
+  </div>
+</header>
+
+<!-- clears the fixed header — this page has no hero behind it -->
+<div class="h-20" aria-hidden="true"></div>
+
+<!-- BLOG -->
+<section id="blog" class="bg-bone">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10 py-16 lg:py-24">
+    <div class="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+      <div class="max-w-xl">
+        <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-forest-600">Blog</p>
+        <h1 class="mt-3 text-3xl md:text-4xl font-semibold tracking-tight leading-tight">Ideas sobre ciudad, diseño y norma.</h1>
+      </div>
+      <p class="text-muted text-[15px] max-w-sm">Artículos de los socios sobre normativa, diseño, urbanismo, visualización y construcción.</p>
+    </div>
+
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="blog-grid"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-forest-950 text-bone/60 border-t border-bone/10">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10 py-14 grid gap-10 lg:grid-cols-12">
+    <div class="lg:col-span-4">
+      <div class="flex items-center gap-2.5">
+        <img src="assets/isotipo.png" alt="" class="w-6 h-6 object-contain brand-mark on-dark" />
+        <span class="text-[14px] font-semibold text-bone/85">Mesa Urbana</span>
+      </div>
+      <p class="mt-4 text-[13px] leading-relaxed max-w-xs">MESA URBANA SAS — Arquitectura, urbanismo, construcción e inmobiliaria en todo el territorio.</p>
+      <div class="mt-5 flex items-center gap-3">
+        <a href="#" aria-label="Instagram" class="btn-press w-9 h-9 rounded-full border border-bone/15 flex items-center justify-center hover:bg-bone/10">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn" class="btn-press w-9 h-9 rounded-full border border-bone/15 flex items-center justify-center hover:bg-bone/10">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M7.5 10v6.5M7.5 7.2v.1M11 16.5V13c0-1.4 1-2.4 2.2-2.4 1.2 0 2 .8 2 2.3v3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </a>
+        <a href="#" aria-label="Behance" class="btn-press w-9 h-9 rounded-full border border-bone/15 flex items-center justify-center hover:bg-bone/10">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><text x="12" y="15.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" font-weight="700" fill="currentColor">Be</text></svg>
+        </a>
+        <a href="#" aria-label="Facebook" class="btn-press w-9 h-9 rounded-full border border-bone/15 flex items-center justify-center hover:bg-bone/10">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="1.6"/><path d="M13.4 20v-6.6h2.1l.3-2.5h-2.4V9.2c0-.7.2-1.2 1.2-1.2h1.3V5.8c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.15-3.2 3.27v1.83H8.7v2.5h2.1V20" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" aria-label="TikTok" class="btn-press w-9 h-9 rounded-full border border-bone/15 flex items-center justify-center hover:bg-bone/10">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 3v10.7a3 3 0 11-2.4-2.94" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 3c.4 2.1 2.1 3.7 4.2 3.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="lg:col-span-2 lg:col-start-6">
+      <p class="text-[12px] uppercase tracking-[0.14em] text-bone/40 font-mono">Navegación</p>
+      <div class="mt-4 flex flex-col gap-2.5 text-[13.5px]">
+        <a href="index.html#top" class="hover:text-bone transition-colors">Inicio</a>
+        <a href="index.html#portafolio" class="hover:text-bone transition-colors">Portafolio</a>
+        <a href="index.html#servicios" class="hover:text-bone transition-colors">Servicios</a>
+        <a href="index.html#nosotros" class="hover:text-bone transition-colors">Quiénes somos</a>
+      </div>
+    </div>
+
+    <div class="lg:col-span-2">
+      <p class="text-[12px] uppercase tracking-[0.14em] text-bone/40 font-mono">Contenido</p>
+      <div class="mt-4 flex flex-col gap-2.5 text-[13.5px]">
+        <a href="recursos.html" target="_blank" rel="noopener" class="hover:text-bone transition-colors">Recursos</a>
+        <a href="blog.html" target="_blank" rel="noopener" class="hover:text-bone transition-colors">Blog</a>
+        <a href="index.html#contacto" class="hover:text-bone transition-colors">Contacto</a>
+      </div>
+    </div>
+
+    <div class="lg:col-span-3">
+      <p class="text-[12px] uppercase tracking-[0.14em] text-bone/40 font-mono">Contacto</p>
+      <div class="mt-4 flex flex-col gap-2.5 text-[13.5px]">
+        <a href="mailto:mesaurbana.arquitectura@gmail.com" class="hover:text-bone transition-colors">mesaurbana.arquitectura@gmail.com</a>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-bone/10">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px]">
+      <span>© 2026 Mesa Urbana S.A.S. Todos los derechos reservados.</span>
+      <span class="text-bone/40">NIT 902.090.674</span>
+    </div>
+  </div>
+</footer>
+
+<!-- BLOG ARTICLE MODAL -->
+<div id="blog-modal" class="hidden fixed inset-0 z-[100] items-center justify-center p-4 sm:p-8" role="dialog" aria-modal="true" aria-labelledby="blog-modal-title">
+  <div id="blog-modal-panel" class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white border border-ink/10">
+    <button id="blog-modal-close" type="button" class="btn-press absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white/80 border border-ink/10 flex items-center justify-center" aria-label="Cerrar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+
+    <div class="relative aspect-[16/9]">
+      <img id="blog-modal-image" src="" alt="" class="w-full h-full object-cover">
+    </div>
+
+    <div class="p-7 md:p-9">
+      <span id="blog-modal-category" class="font-mono text-[11px] uppercase tracking-[0.18em] text-forest-600"></span>
+      <h3 id="blog-modal-title" class="mt-2 text-2xl font-semibold tracking-tight"></h3>
+      <p id="blog-modal-meta" class="mt-2 text-muted text-[13.5px]"></p>
+      <div id="blog-modal-body" class="mt-5 text-[15px] text-ink/80 leading-relaxed space-y-4"></div>
+
+      <div class="mt-8 pt-6 border-t border-ink/8 flex items-center justify-between gap-4">
+        <button id="blog-modal-share" type="button" class="btn-press inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-[13px] font-medium">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="12" r="2.2" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="6" r="2.2" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="18" r="2.2" stroke="currentColor" stroke-width="1.6"/><path d="M7.8 10.8l8.4-4.6M7.8 13.2l8.4 4.6" stroke="currentColor" stroke-width="1.6"/></svg>
+          Compartir
+        </button>
+        <span id="blog-modal-share-msg" class="hidden text-[13px] text-forest-600"></span>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-ink/8">
+        <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Relacionados</p>
+        <div id="blog-modal-related" class="mt-4 grid sm:grid-cols-2 gap-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHATSAPP FLOATING WIDGET -->
+<div class="wa-widget fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-[90] flex flex-col items-end gap-3">
+  <div id="wa-panel" class="wa-panel origin-bottom-right w-[86vw] max-w-[320px] rounded-2xl overflow-hidden border border-ink/10 bg-white shadow-2xl" role="dialog" aria-modal="false" aria-labelledby="wa-panel-title">
+    <div class="bg-forest-950 text-bone px-5 py-4 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center shrink-0">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M20.52 3.449C18.24 1.245 15.24 0 12.05 0 5.463 0 .102 5.36.1 11.947a11.9 11.9 0 001.595 5.945L0 24l6.335-1.652a11.93 11.93 0 005.71 1.447h.005c6.585 0 11.946-5.36 11.949-11.947 0-3.191-1.226-6.19-3.479-8.399zM12.05 21.785h-.004a9.9 9.9 0 01-5.043-1.383l-.362-.214-3.741.978.998-3.648-.235-.373a9.86 9.86 0 01-1.51-5.244c.001-5.462 4.462-9.912 9.898-9.912 2.646 0 5.131 1.03 6.994 2.897a9.788 9.788 0 012.895 6.99c-.002 5.462-4.464 9.909-9.891 9.909z"/></svg>
+      </div>
+      <div class="min-w-0">
+        <p id="wa-panel-title" class="text-[14px] font-semibold truncate">Mesa Urbana</p>
+        <p class="text-[12px] text-bone/60">Normalmente responde en minutos</p>
+      </div>
+      <button id="wa-panel-close" type="button" class="btn-press ml-auto w-8 h-8 rounded-full flex items-center justify-center hover:bg-bone/10 shrink-0" aria-label="Cerrar chat">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="p-5 bg-[#ECE5DD]">
+      <div class="bg-white rounded-xl rounded-tl-sm px-4 py-3 text-[14px] text-ink/80 leading-relaxed shadow-sm max-w-[85%]">
+        ¡Hola! 👋 ¿En qué proyecto podemos ayudarte? Escríbenos y te respondemos por WhatsApp.
+      </div>
+    </div>
+    <div class="p-4 bg-white border-t border-ink/8 grid gap-3">
+      <textarea id="wa-message" rows="2" aria-label="Escribe tu mensaje para Mesa Urbana" placeholder="Escribe tu mensaje (opcional)" class="w-full rounded-lg border border-ink/15 px-4 py-2.5 text-[14px] text-ink resize-none focus:outline-none focus:border-forest-500 focus:ring-1 focus:ring-forest-500"></textarea>
+      <a id="wa-start-chat" href="https://wa.me/573133201358?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20un%20proyecto" target="_blank" rel="noopener noreferrer" class="btn-press w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] text-white text-[14px] font-medium px-5 py-3 hover:brightness-95">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M20.52 3.449C18.24 1.245 15.24 0 12.05 0 5.463 0 .102 5.36.1 11.947a11.9 11.9 0 001.595 5.945L0 24l6.335-1.652a11.93 11.93 0 005.71 1.447h.005c6.585 0 11.946-5.36 11.949-11.947 0-3.191-1.226-6.19-3.479-8.399zM12.05 21.785h-.004a9.9 9.9 0 01-5.043-1.383l-.362-.214-3.741.978.998-3.648-.235-.373a9.86 9.86 0 01-1.51-5.244c.001-5.462 4.462-9.912 9.898-9.912 2.646 0 5.131 1.03 6.994 2.897a9.788 9.788 0 012.895 6.99c-.002 5.462-4.464 9.909-9.891 9.909z"/></svg>
+        Iniciar chat en WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <button id="wa-fab" type="button" class="btn-press relative w-16 h-16 rounded-full bg-[#25D366] shadow-2xl flex items-center justify-center" aria-label="Abrir chat de WhatsApp" aria-expanded="false" aria-controls="wa-panel">
+    <span class="wa-fab-ping absolute inset-0 rounded-full bg-[#25D366]"></span>
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" class="relative z-10"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M20.52 3.449C18.24 1.245 15.24 0 12.05 0 5.463 0 .102 5.36.1 11.947a11.9 11.9 0 001.595 5.945L0 24l6.335-1.652a11.93 11.93 0 005.71 1.447h.005c6.585 0 11.946-5.36 11.949-11.947 0-3.191-1.226-6.19-3.479-8.399zM12.05 21.785h-.004a9.9 9.9 0 01-5.043-1.383l-.362-.214-3.741.978.998-3.648-.235-.373a9.86 9.86 0 01-1.51-5.244c.001-5.462 4.462-9.912 9.898-9.912 2.646 0 5.131 1.03 6.994 2.897a9.788 9.788 0 012.895 6.99c-.002 5.462-4.464 9.909-9.891 9.909z"/></svg>
+  </button>
+</div>
+
+<script>
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('is-visible'), i * 40);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // mobile menu (animated via CSS grid-rows, see #mobile-menu rules)
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('is-open');
+    menuBtn.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+  function toggleMobileMenu() {
+    const willOpen = !mobileMenu.classList.contains('is-open');
+    mobileMenu.classList.toggle('is-open', willOpen);
+    menuBtn.classList.toggle('is-open', willOpen);
+    menuBtn.setAttribute('aria-expanded', String(willOpen));
+  }
+  menuBtn.addEventListener('click', toggleMobileMenu);
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+
+  // social icons (nav + footer): real profile URLs pending, keep placeholders from jumping to page top
+  document.querySelectorAll('a[href="#"]').forEach(a => a.addEventListener('click', (e) => e.preventDefault()));
+
+  // shared focus trap: keeps Tab/Shift+Tab cycling inside an open modal instead of escaping to the dimmed background
+  function trapTabKey(e, container) {
+    const focusable = container.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
+  // ---- BLOG: data, render, modal, related, share, hash link ----
+  const blogPostsData = [
+    {
+      slug: 'pot-ibague-explicado',
+      category: 'normativa', categoryLabel: 'Normativa',
+      title: 'El POT, explicado sin tecnicismos',
+      author: 'Helena Guerrero', date: '12 mar 2026',
+      image: 'assets/blog/pot-ibague-explicado.jpg',
+      excerpt: 'Qué es realmente el Plan de Ordenamiento Territorial y por qué debería importarte antes de comprar o diseñar.',
+      body: [
+        'El Plan de Ordenamiento Territorial (POT) define qué se puede construir, dónde y con qué características en cada zona de la ciudad. Aun así, sigue siendo uno de los documentos menos comprendidos por quienes están a punto de invertir en un proyecto.',
+        'En la práctica, el POT determina el uso del suelo, la altura permitida, los índices de ocupación y construcción, y las cargas urbanísticas que debe asumir cada desarrollo. Leerlo bien desde el diagnóstico evita rediseños costosos más adelante.',
+      ],
+    },
+    {
+      slug: 'decisiones-programa-arquitectonico',
+      category: 'diseno', categoryLabel: 'Diseño',
+      title: 'Cinco decisiones de diseño que definen un buen programa arquitectónico',
+      author: 'Carlos Prada', date: '28 mar 2026',
+      image: 'assets/blog/decisiones-programa-arquitectonico.jpg',
+      excerpt: 'El programa arquitectónico se decide antes de dibujar la primera planta. Estas son las decisiones que más pesan.',
+      body: [
+        'Un buen programa arquitectónico no es una lista de áreas: es la traducción de cómo va a funcionar un edificio antes de que exista. Las decisiones tempranas sobre circulación, luz natural y flexibilidad de uso son las que más impacto tienen en el resultado final.',
+        'Priorizar estas decisiones desde el anteproyecto reduce ajustes en etapas avanzadas, donde cambiar algo cuesta mucho más tiempo y presupuesto.',
+      ],
+    },
+    {
+      slug: 'leer-espacio-publico',
+      category: 'urbanismo', categoryLabel: 'Urbanismo',
+      title: 'Cómo leer un espacio público antes de intervenirlo',
+      author: 'Helena Guerrero', date: '9 abr 2026',
+      image: 'assets/blog/leer-espacio-publico.jpg',
+      excerpt: 'Antes de proponer, hay que observar: cómo se mueve la gente, dónde se detiene y qué le falta al lugar.',
+      body: [
+        'Toda intervención de espacio público exitosa empieza con observación directa: flujos peatonales, puntos de permanencia, sombra, comercio informal y percepción de seguridad. Estos datos, más que cualquier plano de referencia, son los que guían un buen diseño urbano.',
+        'Diseñar sin este paso previo suele producir espacios técnicamente correctos pero que la gente termina sin usar.',
+      ],
+    },
+    {
+      slug: 'render-vende-antes-que-plano',
+      category: 'visualizacion', categoryLabel: 'Visualización',
+      title: 'Por qué un buen render vende antes que un buen plano',
+      author: 'Carlos Prada', date: '20 abr 2026',
+      image: 'assets/blog/render-vende-antes-que-plano.jpg',
+      excerpt: 'La visualización arquitectónica dejó de ser un lujo estético: hoy es una herramienta de decisión y de ventas.',
+      body: [
+        'Un cliente rara vez puede leer un plano con la misma claridad que un arquitecto. Un render fotorrealista, en cambio, comunica de inmediato la escala, la materialidad y la atmósfera de un proyecto.',
+        'Por eso integramos visualización desde etapas tempranas: permite validar decisiones de diseño con el cliente y, en desarrollos inmobiliarios, iniciar preventa antes del primer ladrillo.',
+      ],
+    },
+    {
+      slug: 'control-calidad-obra',
+      category: 'construccion', categoryLabel: 'Construcción',
+      title: 'Control de calidad en obra: los puntos que no se pueden saltar',
+      author: 'Rafael Serrano', date: '3 may 2026',
+      image: 'assets/blog/control-calidad-obra.jpg',
+      excerpt: 'Hay etapas de la obra donde un atajo hoy se convierte en un problema estructural o legal después.',
+      body: [
+        'El control de calidad no es un formalismo: es lo que garantiza que lo diseñado se construya tal como se planeó, dentro del presupuesto y los tiempos acordados. Cimentación, impermeabilización y redes son los puntos donde menos margen de error se puede permitir.',
+        'Un seguimiento constante en obra, con interventoría técnica independiente, es la diferencia entre una entrega sin sobresaltos y una llena de reprocesos.',
+      ],
+    },
+    {
+      slug: 'errores-comunes-licencias',
+      category: 'normativa', categoryLabel: 'Normativa',
+      title: 'Licencias de construcción: los errores más comunes al tramitarlas',
+      author: 'Rafael Serrano', date: '15 may 2026',
+      image: 'assets/blog/errores-comunes-licencias.jpg',
+      excerpt: 'La mayoría de retrasos en licenciamiento se repiten proyecto tras proyecto. Aquí los más frecuentes.',
+      body: [
+        'Documentación incompleta, estudios técnicos desactualizados y curadurías con criterios distintos entre municipios son las causas más comunes de retraso en el trámite de licencias, sin importar la región del país.',
+        'Anticipar estos puntos desde la etapa de diagnóstico —antes de radicar— reduce significativamente los tiempos de aprobación.',
+      ],
+    },
+  ];
+
+  const blogGrid = document.getElementById('blog-grid');
+  blogPostsData.forEach(post => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.dataset.post = post.slug;
+    card.dataset.category = post.category;
+    card.className = 'blog-item reveal card-hover zoom-parent block w-full text-left rounded-2xl overflow-hidden border border-ink/8 bg-white';
+    card.innerHTML = `
+      <div class="relative aspect-[4/3] overflow-hidden">
+        <img src="${post.image}" alt="" class="duotone zoom-img w-full h-full object-cover">
+        <div class="absolute inset-0 duotone-overlay"></div>
+      </div>
+      <div class="p-6">
+        <span class="font-mono text-[10.5px] uppercase tracking-[0.18em] text-forest-600">${post.categoryLabel}</span>
+        <h3 class="mt-2 text-lg font-semibold leading-snug">${post.title}</h3>
+        <p class="mt-2 text-muted text-[13.5px]">${post.author} · ${post.date}</p>
+      </div>`;
+    blogGrid.appendChild(card);
+    io.observe(card);
+  });
+
+  const blogModal = document.getElementById('blog-modal');
+  const blogModalImage = document.getElementById('blog-modal-image');
+  const blogModalCategory = document.getElementById('blog-modal-category');
+  const blogModalTitle = document.getElementById('blog-modal-title');
+  const blogModalMeta = document.getElementById('blog-modal-meta');
+  const blogModalBody = document.getElementById('blog-modal-body');
+  const blogModalRelated = document.getElementById('blog-modal-related');
+  const blogModalClose = document.getElementById('blog-modal-close');
+  const blogModalShare = document.getElementById('blog-modal-share');
+  const blogModalShareMsg = document.getElementById('blog-modal-share-msg');
+  let lastFocusedBlogEl = null;
+  let currentPostSlug = null;
+
+  function openBlogModal(slug, triggerEl) {
+    const post = blogPostsData.find(p => p.slug === slug);
+    if (!post) return;
+    currentPostSlug = slug;
+    lastFocusedBlogEl = triggerEl || document.activeElement;
+    blogModalShareMsg.classList.add('hidden');
+
+    blogModalImage.src = post.image;
+    blogModalImage.alt = post.title;
+    blogModalCategory.textContent = post.categoryLabel;
+    blogModalTitle.textContent = post.title;
+    blogModalMeta.textContent = `${post.author} · ${post.date}`;
+    blogModalBody.innerHTML = post.body.map(p => `<p>${p}</p>`).join('');
+
+    const related = blogPostsData.filter(p => p.slug !== slug && p.category === post.category);
+    const relatedFallback = blogPostsData.filter(p => p.slug !== slug && !related.includes(p));
+    const relatedFinal = related.concat(relatedFallback).slice(0, 2);
+    blogModalRelated.innerHTML = relatedFinal.map(p => `
+      <button type="button" data-post="${p.slug}" class="related-post text-left rounded-xl overflow-hidden border border-ink/8 bg-bone flex gap-3 p-3">
+        <img src="${p.image}" alt="" class="w-16 h-16 rounded-lg object-cover shrink-0">
+        <span class="text-[13px] font-medium leading-snug">${p.title}</span>
+      </button>`).join('');
+
+    blogModal.classList.remove('hidden');
+    blogModal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => blogModal.classList.add('is-open'));
+    blogModalClose.focus();
+    history.replaceState(null, '', `#post-${slug}`);
+    blogModalPanel().scrollTo({ top: 0 });
+  }
+  function blogModalPanel() { return document.getElementById('blog-modal-panel'); }
+
+  function closeBlogModal() {
+    blogModal.classList.remove('is-open');
+    document.body.style.overflow = '';
+    const durationMs = prefersReducedMotion ? 0 : 200;
+    setTimeout(() => {
+      blogModal.classList.add('hidden');
+      blogModal.classList.remove('flex');
+    }, durationMs);
+    if (lastFocusedBlogEl) lastFocusedBlogEl.focus();
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+
+  blogGrid.addEventListener('click', (e) => {
+    const card = e.target.closest('[data-post]');
+    if (card) openBlogModal(card.dataset.post, card);
+  });
+  blogModalRelated.addEventListener('click', (e) => {
+    const card = e.target.closest('[data-post]');
+    if (card) openBlogModal(card.dataset.post, card);
+  });
+  blogModalClose.addEventListener('click', closeBlogModal);
+  blogModal.addEventListener('click', (e) => { if (e.target === blogModal) closeBlogModal(); });
+  blogModalShare.addEventListener('click', async () => {
+    const post = blogPostsData.find(p => p.slug === currentPostSlug);
+    const shareUrl = `${location.origin}${location.pathname}#post-${currentPostSlug}`;
+    if (navigator.share) {
+      try { await navigator.share({ title: post.title, url: shareUrl }); return; } catch (err) { /* usuario canceló */ }
+    }
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      blogModalShareMsg.textContent = 'Enlace copiado.';
+      blogModalShareMsg.classList.remove('hidden');
+    } catch (err) { /* clipboard no disponible */ }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (blogModal.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeBlogModal();
+    if (e.key === 'Tab') trapTabKey(e, blogModal);
+  });
+
+  // open a post modal directly from a shared hash link (#post-slug)
+  (function handleInitialHash() {
+    const hash = location.hash.replace('#', '');
+    if (hash.startsWith('post-')) {
+      const slug = hash.replace('post-', '');
+      if (blogPostsData.some(p => p.slug === slug)) openBlogModal(slug);
+    }
+  })();
+
+  // WhatsApp floating widget
+  const waFab = document.getElementById('wa-fab');
+  const waPanel = document.getElementById('wa-panel');
+  const waPanelClose = document.getElementById('wa-panel-close');
+  function toggleWaPanel(force) {
+    const willOpen = typeof force === 'boolean' ? force : !waPanel.classList.contains('is-open');
+    waPanel.classList.toggle('is-open', willOpen);
+    waFab.setAttribute('aria-expanded', String(willOpen));
+  }
+  waFab.addEventListener('click', () => toggleWaPanel());
+  waPanelClose.addEventListener('click', () => toggleWaPanel(false));
+  document.addEventListener('click', (e) => {
+    if (!waPanel.classList.contains('is-open')) return;
+    if (waPanel.contains(e.target) || waFab.contains(e.target)) return;
+    toggleWaPanel(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') toggleWaPanel(false);
+  });
+  // el mensaje escrito en el panel viaja prellenado al chat de WhatsApp de Mesa Urbana
+  const waMessage = document.getElementById('wa-message');
+  const waStartChat = document.getElementById('wa-start-chat');
+  const WA_NUMBER = '573133201358';
+  const WA_DEFAULT_TEXT = 'Hola, quiero información sobre un proyecto';
+  waMessage.addEventListener('input', () => {
+    waStartChat.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage.value.trim() || WA_DEFAULT_TEXT)}`;
+  });
+</script>
+
+</body>
+</html>
