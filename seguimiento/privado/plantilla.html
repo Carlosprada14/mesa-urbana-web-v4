@@ -291,7 +291,8 @@
     var reuniones = ordenar(porTipo('Reunión'));
     var entregadas = ordenar(porTipo('Entrega').filter(function (h) { return h.estado === 'Hecho'; })).reverse();
     var pendientes = ordenar(porTipo('Pendiente del cliente').filter(function (h) { return h.estado !== 'Hecho'; }));
-    var viene = ordenar(hitos.filter(function (h) { return h.tipo !== 'Pendiente del cliente' && h.estado !== 'Hecho'; }));
+    var novedades = ordenar(porTipo('Novedad')).reverse();
+    var viene = ordenar(hitos.filter(function (h) { return h.tipo !== 'Pendiente del cliente' && h.tipo !== 'Novedad' && h.estado !== 'Hecho'; }));
     // primero lo que está en curso, luego lo próximo
     viene.sort(function (a, b) { return (a.estado === 'En curso' ? 0 : 1) - (b.estado === 'En curso' ? 0 : 1); });
 
@@ -330,7 +331,7 @@
     cont.appendChild(fila);
 
     // 3. cronograma
-    var t4 = tarjeta('Cronograma', 'Etapas y entregas, de principio a fin.');
+    var t4 = tarjeta('Cronograma', 'Etapas y entregas, de principio a fin. Los plazos se cuentan en días hábiles, según lo pactado.');
     if (etapas.length) {
       var hechas = etapas.filter(function (h) { return h.estado === 'Hecho'; }).length;
       var av = el('div', 'avance');
@@ -356,6 +357,12 @@
       t4.appendChild(el('p', 'vacio', 'El cronograma se publicará aquí en cuanto quede definido.'));
     }
     cont.appendChild(t4);
+
+    // 3b. novedades: el compromiso se muestra siempre, a todos los clientes
+    var tn = tarjeta('Novedades', 'Cualquier novedad, como demoras en las consultas o en la información que necesitamos, se la notificaremos y quedará registrada aquí.');
+    if (novedades.length) tn.appendChild(listaHitos(novedades, { estado: false }));
+    else tn.appendChild(el('p', 'vacio', 'Sin novedades por ahora.'));
+    cont.appendChild(tn);
 
     // 4. reuniones y entregado
     var fila2 = el('div', 'rejilla dos');
