@@ -1,0 +1,6 @@
+# Portal de seguimiento: sin listado de archivos y fuera de los buscadores.
+Options -Indexes
+DirectoryIndex index.php
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow, noarchive"
+</IfModule>

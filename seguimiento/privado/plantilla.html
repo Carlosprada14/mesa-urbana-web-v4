@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Seguimiento del proyecto — Mesa Urbana S.A.S.</title>
+<link rel="icon" type="image/png" href="/assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde-950: #0A2A1F; --verde-900: #0D3324; --verde-600: #1E6B4C; --verde-500: #278860;
+    --hueso: #F4F6F3; --tinta: #10140F; --gris: #4B5750; --linea: rgba(16,20,15,.10);
+    --ambar: #9A6A12; --ambar-fondo: #FBF3E2; --naranja: #A64B12; --naranja-fondo: #FCEEE4;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--hueso); color: var(--tinta); font-family: Outfit, system-ui, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: var(--verde-600); }
+  .contenedor { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 640px) { .contenedor { padding: 0 28px; } }
+
+  /* barra superior */
+  .barra { background: #fff; border-bottom: 1px solid var(--linea); }
+  .barra .contenedor { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; }
+  .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .marca img.iso { width: 36px; height: 36px; object-fit: contain; }
+  .marca img.palabra { height: 26px; width: auto; }
+  .etiqueta-barra { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); text-align: right; }
+
+  /* cabecera del proyecto */
+  .cabecera { background: var(--verde-950); color: var(--hueso); padding: 36px 0 40px; }
+  .cabecera .rotulo { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: rgba(244,246,243,.6); margin: 0; }
+  .cabecera h1 { font-size: clamp(28px, 6vw, 44px); line-height: 1.08; font-weight: 600; letter-spacing: -.02em; margin: 10px 0 0; }
+  .cabecera .servicio { margin: 10px 0 0; font-size: 17px; color: rgba(244,246,243,.85); }
+  .datos-cabecera { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; font-size: 14px; color: rgba(244,246,243,.75); }
+  .datos-cabecera b { color: var(--hueso); font-weight: 500; }
+  .estado-proyecto { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 6px 12px; border-radius: 999px; background: rgba(244,246,243,.10); border: 1px solid rgba(244,246,243,.18); font-size: 13px; font-weight: 500; }
+  .estado-proyecto::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #6FD3A2; }
+  .estado-proyecto.pausa::before { background: #E8C46A; }
+  .estado-proyecto.inicio::before { background: #9BC3F0; }
+  .estado-proyecto.fin::before { background: rgba(244,246,243,.55); }
+
+  /* secciones */
+  main { padding: 28px 0 56px; }
+  .tarjeta { background: #fff; border: 1px solid var(--linea); border-radius: 16px; padding: 22px 20px; margin-top: 16px; }
+  @media (min-width: 640px) { .tarjeta { padding: 28px 30px; } }
+  .tarjeta h2 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -.01em; }
+  .tarjeta .ayuda { margin: 4px 0 0; color: var(--gris); font-size: 14px; }
+  .resumen { font-size: 17px; line-height: 1.6; margin: 12px 0 0; white-space: pre-line; }
+  .vacio { color: var(--gris); font-size: 15px; margin: 14px 0 0; }
+  .rejilla { display: grid; gap: 16px; }
+  @media (min-width: 760px) { .rejilla.dos { grid-template-columns: 1fr 1fr; align-items: start; } .rejilla.dos .tarjeta { margin-top: 0; } }
+  .rejilla.dos { margin-top: 16px; }
+
+  /* lista de hitos */
+  .lista { list-style: none; margin: 14px 0 0; padding: 0; }
+  .lista li { display: grid; grid-template-columns: 92px 1fr; gap: 4px 16px; padding: 14px 0; border-top: 1px solid var(--linea); }
+  .lista li:first-child { border-top: 0; }
+  .lista .cuando { font-family: "JetBrains Mono", monospace; font-size: 12.5px; color: var(--gris); padding-top: 3px; line-height: 1.4; }
+  .lista .que { min-width: 0; }
+  .lista .titulo { font-weight: 500; }
+  .lista .detalle { color: var(--gris); font-size: 14.5px; margin-top: 2px; }
+  .lista .ver { display: inline-block; margin-top: 6px; font-size: 14px; font-weight: 500; text-decoration: none; }
+  .lista .ver:hover { text-decoration: underline; }
+  @media (max-width: 420px) { .lista li { grid-template-columns: 1fr; } .lista .cuando { padding-top: 0; } }
+
+  .chip { display: inline-block; font-size: 12px; font-weight: 500; padding: 2px 9px; border-radius: 999px; margin-left: 8px; vertical-align: 2px; white-space: nowrap; }
+  .chip.hecho { background: #EAF1EC; color: var(--verde-600); }
+  .chip.curso { background: var(--verde-600); color: #fff; }
+  .chip.proximo { background: var(--ambar-fondo); color: var(--ambar); }
+  .chip.tipo { background: var(--hueso); color: var(--gris); }
+
+  /* cronograma */
+  .avance { margin-top: 16px; }
+  .avance .texto { font-size: 14px; color: var(--gris); }
+  .avance .barra-avance { height: 8px; background: var(--hueso); border-radius: 999px; overflow: hidden; margin-top: 8px; }
+  .avance .barra-avance span { display: block; height: 100%; background: var(--verde-500); border-radius: 999px; }
+  .linea-tiempo { list-style: none; margin: 18px 0 0; padding: 0; position: relative; }
+  .linea-tiempo li { position: relative; padding: 0 0 20px 30px; }
+  .linea-tiempo li:last-child { padding-bottom: 0; }
+  .linea-tiempo li::before { content: ""; position: absolute; left: 7px; top: 22px; bottom: -2px; width: 2px; background: var(--linea); }
+  .linea-tiempo li:last-child::before { display: none; }
+  .linea-tiempo li.hecho::before { background: rgba(30,107,76,.45); }
+  .linea-tiempo .punto { position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--linea); background: #fff; }
+  .linea-tiempo .hecho .punto { background: var(--verde-600); border-color: var(--verde-600); }
+  .linea-tiempo .hecho .punto::after { content: ""; position: absolute; left: 4px; top: 1px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+  .linea-tiempo .curso .punto { border-color: var(--verde-500); box-shadow: 0 0 0 4px rgba(39,136,96,.18); }
+  .linea-tiempo .curso .punto::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--verde-500); }
+  .linea-tiempo .titulo { font-weight: 500; }
+  .linea-tiempo .hecho .titulo { color: var(--gris); }
+  .linea-tiempo .meta { font-family: "JetBrains Mono", monospace; font-size: 12.5px; color: var(--gris); margin-top: 2px; }
+  .linea-tiempo .detalle { color: var(--gris); font-size: 14.5px; margin-top: 2px; }
+
+  /* lo que necesitamos de usted */
+  .tarjeta.pide { background: var(--naranja-fondo); border-color: rgba(166,75,18,.18); }
+  .tarjeta.pide h2 { color: var(--naranja); }
+  .tarjeta.pide .lista li { border-top-color: rgba(166,75,18,.15); }
+
+  /* contacto */
+  .contacto { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .boton { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid var(--linea); color: var(--tinta); background: #fff; }
+  .boton.principal { background: var(--verde-950); color: var(--hueso); border-color: var(--verde-950); }
+  .boton:hover { filter: brightness(.96); }
+
+  footer { border-top: 1px solid var(--linea); padding: 22px 0 40px; color: var(--gris); font-size: 13px; }
+  footer p { margin: 4px 0; }
+
+  /* mensaje de error */
+  .mensaje { max-width: 560px; margin: 64px auto; text-align: center; }
+  .mensaje h1 { font-size: 26px; font-weight: 600; margin: 0; }
+  .mensaje p { color: var(--gris); margin: 12px 0 0; }
+</style>
+</head>
+<body>
+<header class="barra">
+  <div class="contenedor">
+    <a class="marca" href="/" aria-label="Mesa Urbana, ir a la página principal">
+      <img class="iso" src="/assets/isotipo.png" alt="">
+      <img class="palabra" src="/assets/wordmark.png" alt="Mesa Urbana">
+    </a>
+    <span class="etiqueta-barra">Seguimiento<br>de proyecto</span>
+  </div>
+</header>
+
+<div id="contenido"></div>
+
+<footer>
+  <div class="contenedor">
+    <p>Esta página es privada: solo puede verla quien tenga el enlace. Le pedimos no compartirla.</p>
+    <p>Mesa Urbana S.A.S. · Ibagué, Tolima · <a href="/politica-de-datos.html">Política de tratamiento de datos</a></p>
+  </div>
+</footer>
+
+<script id="datos" type="application/json">__DATOS_JSON__</script>
+<script>
+(function () {
+  'use strict';
+
+  var raiz = document.getElementById('contenido');
+  var datos = null;
+  try { datos = JSON.parse(document.getElementById('datos').textContent); } catch (e) { datos = null; }
+
+  var WHATSAPP = 'https://wa.me/573133201358';
+  var CORREO = 'contacto@mesaurbanaarquitectos.com';
+
+  // ---------- utilidades ----------
+  function el(etiqueta, clase, texto) {
+    var n = document.createElement(etiqueta);
+    if (clase) n.className = clase;
+    if (texto !== undefined && texto !== null && texto !== '') n.textContent = texto;
+    return n;
+  }
+  function enlaceSeguro(url) { return /^https?:\/\//i.test(url || '') ? url : ''; }
+
+  var MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+  var MESES_LARGOS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+  // Fecha de Notion: "2026-10-05" (solo día) o "2026-10-05T10:00:00.000-05:00" (con hora).
+  function partes(iso) {
+    if (!iso) return null;
+    var soloDia = /^\d{4}-\d{2}-\d{2}$/.test(iso);
+    if (soloDia) {
+      var p = iso.split('-');
+      return { a: +p[0], m: +p[1] - 1, d: +p[2], hora: null, clave: iso };
+    }
+    var f = new Date(iso);
+    if (isNaN(f)) return null;
+    var fmt = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Bogota', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false });
+    var o = {};
+    fmt.formatToParts(f).forEach(function (x) { o[x.type] = x.value; });
+    var h = +o.hour % 24, mi = o.minute;
+    var hora = (h % 12 || 12) + ':' + mi + (h < 12 ? ' a. m.' : ' p. m.');
+    return { a: +o.year, m: +o.month - 1, d: +o.day, hora: hora, clave: o.year + '-' + o.month + '-' + o.day };
+  }
+  function textoFecha(fecha) {
+    if (!fecha || !fecha.inicio) return 'Por definir';
+    var i = partes(fecha.inicio), f = partes(fecha.fin);
+    if (!i) return 'Por definir';
+    var txt;
+    if (f && f.clave !== i.clave) {
+      txt = i.d + ' ' + MESES[i.m] + (i.a !== f.a ? ' ' + i.a : '') + ' – ' + f.d + ' ' + MESES[f.m] + ' ' + f.a;
+    } else {
+      txt = i.d + ' ' + MESES[i.m] + ' ' + i.a;
+    }
+    if (i.hora) txt += ' · ' + i.hora;
+    return txt;
+  }
+  function claveOrden(h) { var p = h.fecha && partes(h.fecha.inicio); return p ? p.clave + (h.fecha.inicio || '') : '9999'; }
+  function hoyBogota() {
+    var o = {};
+    new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Bogota', year: 'numeric', month: '2-digit', day: '2-digit' })
+      .formatToParts(new Date()).forEach(function (x) { o[x.type] = x.value; });
+    return o.year + '-' + o.month + '-' + o.day;
+  }
+  function ordenar(lista) { return lista.slice().sort(function (a, b) { return claveOrden(a) < claveOrden(b) ? -1 : claveOrden(a) > claveOrden(b) ? 1 : 0; }); }
+
+  function chipEstado(estado, tipo) {
+    if (tipo === 'Pendiente del cliente' && estado !== 'Hecho') return el('span', 'chip proximo', 'Pendiente');
+    if (estado === 'Hecho') return el('span', 'chip hecho', 'Hecho');
+    if (estado === 'En curso') return el('span', 'chip curso', 'En curso');
+    return el('span', 'chip proximo', 'Próximo');
+  }
+
+  function tarjeta(titulo, ayuda, clase) {
+    var t = el('section', 'tarjeta' + (clase ? ' ' + clase : ''));
+    t.appendChild(el('h2', null, titulo));
+    if (ayuda) t.appendChild(el('p', 'ayuda', ayuda));
+    return t;
+  }
+
+  function listaHitos(hitos, opciones) {
+    opciones = opciones || {};
+    var ul = el('ul', 'lista');
+    hitos.forEach(function (h) {
+      var li = el('li');
+      li.appendChild(el('div', 'cuando', textoFecha(h.fecha)));
+      var que = el('div', 'que');
+      var t = el('div', 'titulo', h.titulo);
+      if (opciones.estado === 'curso') { if (h.estado === 'En curso') t.appendChild(chipEstado(h.estado, h.tipo)); }
+      else if (opciones.estado !== false) t.appendChild(chipEstado(h.estado, h.tipo));
+      if (opciones.tipo && h.tipo && h.tipo !== 'Etapa') t.appendChild(el('span', 'chip tipo', h.tipo));
+      que.appendChild(t);
+      if (h.detalle) que.appendChild(el('div', 'detalle', h.detalle));
+      var url = enlaceSeguro(h.enlace);
+      if (url) {
+        var a = el('a', 'ver', h.tipo === 'Reunión' ? 'Abrir enlace de la reunión →' : 'Ver documento →');
+        a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+        que.appendChild(a);
+      }
+      li.appendChild(que);
+      ul.appendChild(li);
+    });
+    return ul;
+  }
+
+  // ---------- pantallas ----------
+  function pintarMensaje(titulo, texto) {
+    var c = el('div', 'contenedor');
+    var m = el('div', 'mensaje');
+    m.appendChild(el('h1', null, titulo));
+    m.appendChild(el('p', null, texto));
+    var p = el('p');
+    var a = el('a', null, 'Escríbanos por WhatsApp'); a.href = WHATSAPP; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    p.appendChild(a);
+    m.appendChild(p);
+    c.appendChild(m);
+    raiz.appendChild(c);
+    document.title = titulo + ' — Mesa Urbana S.A.S.';
+  }
+
+  function pintarPortal(d) {
+    var p = d.proyecto || {};
+    var hitos = Array.isArray(d.hitos) ? d.hitos.filter(function (h) { return h && h.titulo; }) : [];
+    document.title = (p.nombre ? p.nombre + ' · ' : '') + 'Seguimiento — Mesa Urbana S.A.S.';
+
+    // cabecera
+    var cab = el('section', 'cabecera');
+    var cc = el('div', 'contenedor');
+    cc.appendChild(el('p', 'rotulo', 'Seguimiento del proyecto'));
+    cc.appendChild(el('h1', null, p.nombre || 'Proyecto'));
+    if (p.servicio) cc.appendChild(el('p', 'servicio', p.servicio));
+    var dc = el('div', 'datos-cabecera');
+    function dato(etq, val) { if (!val) return; var s = el('span'); s.appendChild(document.createTextNode(etq + ': ')); s.appendChild(el('b', null, val)); dc.appendChild(s); }
+    dato('Cliente', p.cliente);
+    dato('Ubicación', p.ubicacion);
+    dato('Le atiende', p.responsable);
+    if (dc.childNodes.length) cc.appendChild(dc);
+    if (p.estado) {
+      var clases = { 'En pausa': ' pausa', 'Por iniciar': ' inicio', 'Terminado': ' fin' };
+      cc.appendChild(el('span', 'estado-proyecto' + (clases[p.estado] || ''), p.estado));
+    }
+    cab.appendChild(cc);
+    raiz.appendChild(cab);
+
+    var main = el('main');
+    var cont = el('div', 'contenedor');
+    main.appendChild(cont);
+    raiz.appendChild(main);
+
+    var hoy = hoyBogota();
+    var porTipo = function (t) { return hitos.filter(function (h) { return h.tipo === t; }); };
+    var etapas = ordenar(hitos.filter(function (h) { return h.tipo === 'Etapa' || h.tipo === 'Entrega'; }));
+    var reuniones = ordenar(porTipo('Reunión'));
+    var entregadas = ordenar(porTipo('Entrega').filter(function (h) { return h.estado === 'Hecho'; })).reverse();
+    var pendientes = ordenar(porTipo('Pendiente del cliente').filter(function (h) { return h.estado !== 'Hecho'; }));
+    var viene = ordenar(hitos.filter(function (h) { return h.tipo !== 'Pendiente del cliente' && h.estado !== 'Hecho'; }));
+    // primero lo que está en curso, luego lo próximo
+    viene.sort(function (a, b) { return (a.estado === 'En curso' ? 0 : 1) - (b.estado === 'En curso' ? 0 : 1); });
+
+    // 1. en este momento
+    var t1 = tarjeta('En este momento');
+    if (p.resumen) t1.appendChild(el('p', 'resumen', p.resumen));
+    else t1.appendChild(el('p', 'vacio', 'Pronto publicaremos aquí el estado del proyecto.'));
+    if (d.actualizado) {
+      var a = partes(String(d.actualizado));
+      if (a) t1.appendChild(el('p', 'ayuda', 'Actualizado el ' + a.d + ' de ' + MESES_LARGOS[a.m] + ' de ' + a.a + '.'));
+    }
+    cont.appendChild(t1);
+
+    // 2. lo que viene + lo que necesitamos de usted
+    var fila = el('div', 'rejilla' + (pendientes.length ? ' dos' : ''));
+    var t2 = tarjeta('Lo que viene', 'Los siguientes pasos del proyecto.');
+    if (viene.length) t2.appendChild(listaHitos(viene.slice(0, 5), { tipo: true, estado: 'curso' }));
+    else t2.appendChild(el('p', 'vacio', 'No hay pasos pendientes por ahora.'));
+    fila.appendChild(t2);
+    if (pendientes.length) {
+      var t3 = tarjeta('Lo que necesitamos de usted', 'Para que el proyecto avance sin demoras.', 'pide');
+      t3.appendChild(listaHitos(pendientes, { estado: false }));
+      fila.appendChild(t3);
+    }
+    cont.appendChild(fila);
+
+    // 3. cronograma
+    var t4 = tarjeta('Cronograma', 'Etapas y entregas, de principio a fin.');
+    if (etapas.length) {
+      var hechas = etapas.filter(function (h) { return h.estado === 'Hecho'; }).length;
+      var av = el('div', 'avance');
+      av.appendChild(el('div', 'texto', hechas + ' de ' + etapas.length + ' completadas'));
+      var barra = el('div', 'barra-avance'); var relleno = el('span');
+      relleno.style.width = Math.round(100 * hechas / etapas.length) + '%';
+      barra.appendChild(relleno); av.appendChild(barra);
+      t4.appendChild(av);
+      var ol = el('ol', 'linea-tiempo');
+      etapas.forEach(function (h) {
+        var li = el('li', h.estado === 'Hecho' ? 'hecho' : h.estado === 'En curso' ? 'curso' : 'proximo');
+        li.appendChild(el('span', 'punto'));
+        var tt = el('div', 'titulo', h.titulo);
+        if (h.estado === 'En curso') tt.appendChild(chipEstado(h.estado, h.tipo));
+        if (h.tipo === 'Entrega') tt.appendChild(el('span', 'chip tipo', 'Entrega'));
+        li.appendChild(tt);
+        li.appendChild(el('div', 'meta', textoFecha(h.fecha)));
+        if (h.detalle) li.appendChild(el('div', 'detalle', h.detalle));
+        ol.appendChild(li);
+      });
+      t4.appendChild(ol);
+    } else {
+      t4.appendChild(el('p', 'vacio', 'El cronograma se publicará aquí en cuanto quede definido.'));
+    }
+    cont.appendChild(t4);
+
+    // 4. reuniones y entregado
+    var fila2 = el('div', 'rejilla dos');
+    var t5 = tarjeta('Reuniones');
+    var proximas = reuniones.filter(function (h) { return h.estado !== 'Hecho' && (!h.fecha || !partes(h.fecha.inicio) || partes(h.fecha.inicio).clave >= hoy); });
+    var pasadas = reuniones.filter(function (h) { return proximas.indexOf(h) === -1; }).reverse();
+    if (proximas.length) { t5.appendChild(el('p', 'ayuda', 'Próximas')); t5.appendChild(listaHitos(proximas)); }
+    if (pasadas.length) { t5.appendChild(el('p', 'ayuda', proximas.length ? 'Anteriores' : 'Reuniones realizadas')); t5.appendChild(listaHitos(pasadas, { estado: false })); }
+    if (!reuniones.length) t5.appendChild(el('p', 'vacio', 'No hay reuniones programadas por ahora.'));
+    fila2.appendChild(t5);
+    var t6 = tarjeta('Lo entregado');
+    if (entregadas.length) t6.appendChild(listaHitos(entregadas, { estado: false }));
+    else t6.appendChild(el('p', 'vacio', 'Aquí aparecerá cada documento a medida que lo entreguemos.'));
+    fila2.appendChild(t6);
+    cont.appendChild(fila2);
+
+    // 5. contacto
+    var t7 = tarjeta('¿Tiene alguna pregunta?', 'Escríbanos y le respondemos a la mayor brevedad.');
+    var ct = el('div', 'contacto');
+    var w = el('a', 'boton principal', 'Escribir por WhatsApp'); w.href = WHATSAPP + '?text=' + encodeURIComponent('Hola, tengo una pregunta sobre el proyecto ' + (p.nombre || '')); w.target = '_blank'; w.rel = 'noopener noreferrer';
+    var m = el('a', 'boton', CORREO); m.href = 'mailto:' + CORREO + '?subject=' + encodeURIComponent('Proyecto ' + (p.nombre || ''));
+    ct.appendChild(w); ct.appendChild(m);
+    t7.appendChild(ct);
+    cont.appendChild(t7);
+  }
+
+  if (!datos) pintarMensaje('No pudimos mostrar esta página', 'Inténtelo de nuevo en unos minutos.');
+  else if (datos.error) pintarMensaje(datos.error.titulo || 'Página no disponible', datos.error.texto || '');
+  else pintarPortal(datos);
+})();
+</script>
+</body>
+</html>

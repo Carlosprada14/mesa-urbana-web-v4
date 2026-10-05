@@ -2,3 +2,7 @@
 .DS_Store
 Thumbs.db
 assets/equipo/carlos-prada-original-baja-res.jpeg
+
+# Portal de seguimiento: el secreto de Notion y las copias temporales viven solo en el servidor
+seguimiento/privado/config.php
+seguimiento/privado/cache/
