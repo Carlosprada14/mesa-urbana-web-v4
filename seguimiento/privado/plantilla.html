@@ -70,6 +70,7 @@
   .lista .detalle { color: var(--gris); font-size: 14.5px; margin-top: 2px; }
   .lista .ver { display: inline-block; margin-top: 6px; font-size: 14px; font-weight: 500; text-decoration: none; }
   .lista .ver:hover { text-decoration: underline; }
+  .lista li.sin-fecha { grid-template-columns: 1fr; }
   @media (max-width: 420px) { .lista li { grid-template-columns: 1fr; } .lista .cuando { padding-top: 0; } }
 
   .chip { display: inline-block; font-size: 12px; font-weight: 500; padding: 2px 9px; border-radius: 999px; margin-left: 8px; vertical-align: 2px; white-space: nowrap; }
@@ -221,7 +222,9 @@
     var ul = el('ul', 'lista');
     hitos.forEach(function (h) {
       var li = el('li');
-      li.appendChild(el('div', 'cuando', textoFecha(h.fecha)));
+      // en «Lo que necesitamos de usted» un pendiente sin fecha no lleva «Por definir»
+      if (opciones.ocultarSinFecha && !(h.fecha && h.fecha.inicio)) li.className = 'sin-fecha';
+      else li.appendChild(el('div', 'cuando', textoFecha(h.fecha)));
       var que = el('div', 'que');
       var t = el('div', 'titulo', h.titulo);
       if (opciones.estado === 'curso') { if (h.estado === 'En curso') t.appendChild(chipEstado(h.estado, h.tipo)); }
@@ -325,7 +328,7 @@
     fila.appendChild(t2);
     if (pendientes.length) {
       var t3 = tarjeta('Lo que necesitamos de usted', 'Para que el proyecto avance sin demoras.', 'pide');
-      t3.appendChild(listaHitos(pendientes, { estado: false }));
+      t3.appendChild(listaHitos(pendientes, { estado: false, ocultarSinFecha: true }));
       fila.appendChild(t3);
     }
     cont.appendChild(fila);
