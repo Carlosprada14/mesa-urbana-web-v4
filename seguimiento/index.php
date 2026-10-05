@@ -242,9 +242,19 @@ try {
     @file_put_contents($archivoCopia, (string)json_encode($datos, JSON_UNESCAPED_UNICODE), LOCK_EX);
     responder($datos);
 } catch (Throwable $e) {
-    error_log('Portal Mesa Urbana: ' . $e->getMessage());
+    $detalle = $e->getMessage(); // nunca incluye el token
+    error_log('Portal Mesa Urbana: ' . $detalle);
+    // detalle completo para revisar desde el Administrador de archivos (la carpeta privado/ no se sirve por la web)
+    @file_put_contents($dirCopia . '/ultimo-error.txt', gmdate('c') . ' ' . $detalle . PHP_EOL, LOCK_EX);
     if (is_array($copia)) {
         responder($copia); // mejor la última copia que una página en blanco
     }
-    error_portal(503, 'No pudimos cargar la información', 'Inténtelo de nuevo en unos minutos. Si el problema sigue, escríbanos.');
+    // referencia corta para soporte: N401 = token, N404 = la integración no ve las bases, N400 = consulta, R = red
+    $referencia = 'G';
+    if (preg_match('/Notion HTTP (\d{3})/', $detalle, $m)) {
+        $referencia = 'N' . $m[1];
+    } elseif (strpos($detalle, 'curl') === 0) {
+        $referencia = 'R';
+    }
+    error_portal(503, 'No pudimos cargar la información', 'Inténtelo de nuevo en unos minutos. Si el problema sigue, escríbanos. (Referencia: ' . $referencia . ')');
 }
