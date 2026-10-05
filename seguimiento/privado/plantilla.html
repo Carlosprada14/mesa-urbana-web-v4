@@ -51,6 +51,10 @@
   .tarjeta h2 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -.01em; }
   .tarjeta .ayuda { margin: 4px 0 0; color: var(--gris); font-size: 14px; }
   .resumen { font-size: 17px; line-height: 1.6; margin: 12px 0 0; white-space: pre-line; }
+  .tarjeta.bienvenida { margin-top: 0; border-left: 4px solid var(--verde-500); }
+  .tarjeta.bienvenida .saludo { font-size: 17px; line-height: 1.65; margin: 0; white-space: pre-line; }
+  .tarjeta.bienvenida .firma { margin: 14px 0 0; font-size: 14px; color: var(--gris); }
+  .tarjeta.bienvenida .firma b { color: var(--tinta); font-weight: 500; }
   .vacio { color: var(--gris); font-size: 15px; margin: 14px 0 0; }
   .rejilla { display: grid; gap: 16px; }
   @media (min-width: 760px) { .rejilla.dos { grid-template-columns: 1fr 1fr; align-items: start; } .rejilla.dos .tarjeta { margin-top: 0; } }
@@ -290,6 +294,17 @@
     var viene = ordenar(hitos.filter(function (h) { return h.tipo !== 'Pendiente del cliente' && h.estado !== 'Hecho'; }));
     // primero lo que está en curso, luego lo próximo
     viene.sort(function (a, b) { return (a.estado === 'En curso' ? 0 : 1) - (b.estado === 'En curso' ? 0 : 1); });
+
+    // 0. bienvenida (opcional)
+    if (p.bienvenida) {
+      var tb = el('section', 'tarjeta bienvenida');
+      tb.appendChild(el('p', 'saludo', p.bienvenida));
+      var firma = el('p', 'firma');
+      if (p.responsable) { firma.appendChild(el('b', null, p.responsable)); firma.appendChild(document.createTextNode(' · ')); }
+      firma.appendChild(document.createTextNode('Mesa Urbana S.A.S.'));
+      tb.appendChild(firma);
+      cont.appendChild(tb);
+    }
 
     // 1. en este momento
     var t1 = tarjeta('En este momento');

@@ -192,6 +192,7 @@ function cargar_desde_notion(array $config, string $clave): array
             'servicio' => texto($pp['Servicio'] ?? null),
             'ubicacion' => texto($pp['Ubicación'] ?? null),
             'estado' => opcion($pp['Estado'] ?? null),
+            'bienvenida' => texto($pp['Bienvenida'] ?? null),
             'resumen' => texto($pp['Resumen'] ?? null),
             'responsable' => texto($pp['Responsable'] ?? null),
         ],
